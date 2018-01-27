@@ -46,14 +46,8 @@ public class RegisterServlet extends HttpServlet {
 				throw new Exception("Korisnik vec postoji!");
 			Date d=new Date();
 			d.getTime();
-			SimpleDateFormat formatvr = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
-			String datum;
-			datum = formatvr.format(d);
-			DateFormat formatv = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
-			Date da=formatv.parse(datum);
 			
-
-			Korisnik noviKorisnik = new Korisnik(korisnickoIme, lozinka, ime, prezime, email, "",da, Uloga.KORISNIK, false, null, null, null);
+			Korisnik noviKorisnik = new Korisnik(korisnickoIme, lozinka, ime, prezime, email, "", d, Uloga.KORISNIK, false, null, null, null);
 			KorisnikDAO.add(noviKorisnik);
 		} catch (Exception ex) {
 			message = ex.getMessage();

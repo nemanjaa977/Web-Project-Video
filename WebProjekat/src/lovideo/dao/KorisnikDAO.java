@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.Date;
 
 import lovideo.model.Korisnik;
@@ -33,9 +34,9 @@ public class KorisnikDAO {
 				String opis = rset.getString(index++);
 				Date datumRegistracije = rset.getDate(index++);
 				Uloga uloga = Uloga.valueOf(rset.getString(index++));
-				//boolean blokiran = rset.getBoolean(index++);
+				boolean blokiran = rset.getBoolean(index++);
 				
-				return new Korisnik(korisnickoIme, lozinka, ime, prezime, email, opis, datumRegistracije, uloga, false, null, null, null);
+				return new Korisnik(korisnickoIme, lozinka, ime, prezime, email, opis, datumRegistracije, uloga, blokiran, null, null, null);
 			}
 		} catch (SQLException ex) {
 			System.out.println("Greska u SQL upitu!");
@@ -53,7 +54,7 @@ public class KorisnikDAO {
 
 		PreparedStatement pstmt = null;
 		try {
-			String query = "INSERT INTO users (korisnickoIme, lozinka, ime, prezime, email, opis, datumRegistracije, blokiran, uloga) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? );";
+			String query = "INSERT INTO users (korisnickoIme, lozinka, ime, prezime, email, opis, datumRegistracije, uloga, blokiran) VALUES (?, ?, ?, ? ,? ,? , ?, ?, ?)";
 
 			pstmt = conn.prepareStatement(query);
 			int index = 1;
@@ -63,12 +64,10 @@ public class KorisnikDAO {
 			pstmt.setString(index++, korisnik.getPrezime());
 			pstmt.setString(index++, korisnik.getEmail());
 			pstmt.setString(index++, korisnik.getOpis());
-			pstmt.setDate(index++, (java.sql.Date) korisnik.getDatumRegistracije());
+			Timestamp date = new Timestamp(new Date().getTime());
+			pstmt.setTimestamp(index++, date);
 			pstmt.setString(index++, korisnik.getUloga().toString());
 			pstmt.setBoolean(index++, korisnik.isBlokiran());
-			
-			System.out.println(pstmt);
-			
 			return pstmt.executeUpdate(query) == 1;
 		} catch (SQLException ex) {
 			System.out.println("Greska u SQL upitu!");
