@@ -1,0 +1,108 @@
+* {
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	     -o-box-sizing: border-box;
+			box-sizing: border-box;
+}
+
+html{
+  box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	background-size: cover;
+  background: #e6ffe6;
+}
+
+.navBar {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.navBar a {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.search-container input[type=text] {
+  padding: 7px;
+  margin-top: 10px;
+  font-size: 20px;
+  border: 1px solid #333;
+  width: 30%;
+  background: white;
+  color: #333;
+  border-radius: 2%;
+}
+
+.search-container{
+	text-align:center;
+}
+
+.column {
+  float: left;
+  width: 25%;
+  padding: 0 8px;
+  margin-top: 1em;
+  background: none;
+}
+
+.column .card{
+  background: #e6e6e6;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.container {
+  padding: 0 16px;
+}
+
+.container #username{
+  font-size: 25px;
+  text-decoration: none;
+  color: black;
+}
+
+.button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+}
+
+.button:hover {
+  background-color: gray;
+}
+
+.card img{
+  width:100%;
+}
+
+@media (max-width: 700px) {
+  .column {
+    width: 100%;
+    display: block;
+  }
+}
+
+@media (max-width: 450px) {
+  .navBar .search-container {
+    float: left;
+    width: 100%;
+  }
+
+}

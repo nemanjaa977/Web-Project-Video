@@ -1,27 +1,29 @@
 $(document).ready(function() {
 	var userNameInput = $('#userNameInput');
 	var passwordInput = $('#passwordInput');
+	var message = $('#provera');
 	
 	
-	$('#loginSubmit').on('click', function(event) { // izvršava se na klik na dugme
+	$('#loginSubmit').on('click', function(event) { 
 		var userName = userNameInput.val();
 		var password = passwordInput.val();
 		console.log('userName: ' + userName);
 		console.log('password: ' + password);
-	
-		// kontrola toka se račva na 2 grane
+		
+		if(userName=="" || password =="")
+			message.text("You need to fill in all fields!");
+		
 		$.post('LoginServlet', {'korisnickoIme': userName, 'lozinka': password}, function(data) {
-			// tek kada stigne odgovor izvršiće se ova anonimna funkcija
 			console.log('stigao odgovor');
 			console.log(data);
 			if (data.status == 'success') {
-				window.location.replace('pocetna.html');
+				window.location.replace('user.html?korisnickoIme='+userName);
+			}
+			if (data.status == 'failure') {
+				message.text("Selected incorrect data!");
 			}
 		});
-		// program se odmah nastavlja dalje, pre nego što stigne odgovor
 		console.log('poslat zahtev');
-	
-		// zabraniti da browser obavi podrazumevanu akciju pri događaju
 		event.preventDefault();
 		return false;
 	});

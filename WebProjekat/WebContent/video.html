@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Video</title>
+	<link rel="icon" type="image/png" href="photos/play.png">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+	<link rel="stylesheet" type="text/css" href="css/video.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="jquery-3.2.1.js"></script>
+	<script type="text/javascript" src="js/video.js"></script>
+</head>
+<body>
+	<div class="navBar">
+	  <a class="active" href="pocetna.html"><i class="fa fa-home"></i> Home</a>
+	</div>
+	<div id="videoPlayer">
+		<iframe id="myVideo" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  	</div>
+	<div class="dataVideo">
+ 		<h2 id="videoName"></h2>
+ 		<p id="numberVievs"></p>
+	 	<div class="likeVideo">
+	 		<i class="fa fa-thumbs-up"></i>
+	 		<p id="likeNumber"></p>
+	 		<i class="fa fa-thumbs-down"></i>
+	 		<p id="dislikeNumber"></p>
+	 	</div>
+	</div>
+	<div class="photosSub">
+		<p class="image"><img id="slika" src=""><a href="" id="username"></a></p>
+		<button id="subscribe"> Subscribe</button>
+		<p id="date"></p>
+		<p id="description"></p>
+	</div>
+	<div class="comentar">
+		<p class="image"><img id="slika" src="photos/user.png"></p>
+		<input type="text" placeholder="Add a public comment..." >
+		<button type="submit" id=comButton>Comment</button>
+	</div>
+	<div class="allComment">
+		<div class="oneC">
+			<p><img id='slika' src='photos/admin.png'></p>
+			<p>mark92</p>
+		</div>
+		<div class="twoCom">
+			<p>4 months ago</p>
+			<p id="problem">This movie looks so good. Can't wait till it comes out. 😏﻿</p>
+		<div class="likeX">
+	 		<i class="fa fa-thumbs-up"></i>
+	 		<p id="likeNumber">243</p>
+	 		<i class="fa fa-thumbs-down"></i>
+	 		<p id="dislikeNumber">47</p>
+	 	</div>
+		</div>		
+	</div>
+	<div class="allComment">
+		<div class="oneC">
+			<p><img id='slika' src='photos/admin.png'></p>
+			<p>jo33</p>
+		</div>
+		<div class="twoCom">
+			<p>7 months ago</p>
+			<p id="problem">Oh waoo, i never heard about this movie :o﻿</p>
+		<div class="likeX">
+	 		<i class="fa fa-thumbs-up"></i>
+	 		<p id="likeNumber">243</p>
+	 		<i class="fa fa-thumbs-down"></i>
+	 		<p id="dislikeNumber">47</p>
+	 	</div>
+		</div>		
+	</div>
+	<div class="allComment">
+		<div class="oneC">
+			<p><img id='slika' src='photos/admin.png'></p>
+			<p>frank12</p>
+		</div>
+		<div class="twoCom">
+			<p>3 months ago</p>
+			<p id="problem">Thanks! I've been waiting for the final trailer to drop.﻿ 😏﻿</p>
+		<div class="likeX">
+	 		<i class="fa fa-thumbs-up"></i>
+	 		<p id="likeNumber">243</p>
+	 		<i class="fa fa-thumbs-down"></i>
+	 		<p id="dislikeNumber">47</p>
+	 	</div>
+		</div>		
+	</div>
+</body>
+</html>

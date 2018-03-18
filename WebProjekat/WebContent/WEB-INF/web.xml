@@ -32,4 +32,54 @@
     <servlet-name>RegisterServlet</servlet-name>
     <url-pattern>/RegisterServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>VideoServlet</display-name>
+    <servlet-name>VideoServlet</servlet-name>
+    <servlet-class>lovideo.servlet.VideoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>VideoServlet</servlet-name>
+    <url-pattern>/VideoServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>VideoPageServlet</display-name>
+    <servlet-name>VideoPageServlet</servlet-name>
+    <servlet-class>lovideo.servlet.VideoPageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>VideoPageServlet</servlet-name>
+    <url-pattern>/VideoPageServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LogOutServlet</display-name>
+    <servlet-name>LogOutServlet</servlet-name>
+    <servlet-class>lovideo.servlet.LogOutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogOutServlet</servlet-name>
+    <url-pattern>/LogOutServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>KorisnikServlet</display-name>
+    <servlet-name>KorisnikServlet</servlet-name>
+    <servlet-class>lovideo.servlet.KorisnikServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>KorisnikServlet</servlet-name>
+    <url-pattern>/KorisnikServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AdminServlet</display-name>
+    <servlet-name>AdminServlet</servlet-name>
+    <servlet-class>lovideo.servlet.AdminServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminServlet</servlet-name>
+    <url-pattern>/AdminServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

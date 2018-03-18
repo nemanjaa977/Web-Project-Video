@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Add video</title>
+<link rel="icon" type="image/png" href="photos/play.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<link rel="stylesheet" type="text/css" href="css/addVideo.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="jquery-3.2.1.js"></script>
+<script type="text/javascript" src="js/addVideo.js"></script>
+</head>
+<body>
+	<div class="navBar">
+	</div>
+	
+	<form>
+	  <div class="container">
+	    <h1>Add Video</h1>
+		
+		<label><b>Video Url*</b></label>
+	    <input type="text" id="videoUrl" placeholder="Enter video url" name="url">
+		
+		<label><b>Video Name*</b></label>
+	    <input type="text" id="videoName" placeholder="Enter video name" name="name">
+		
+		<label><b>Description</b></label>
+	    <input type="text" id="descrip" placeholder="Enter description" name="description">
+				
+		<div class="visibi">
+		    <label><b>Visibility*</b></label>
+		    <label id="visib">Public
+				  <input type="radio" checked="checked" name="visibility" value="public">
+				</label>
+				<label>Private
+				  <input type="radio" name="visibility" value="private">
+				</label>
+				<label>Unlisted
+				  <input type="radio" name="visibility" value="unlisted">
+				</label>
+		</div>
+		
+		<div class="comment">
+			<label><b>Allow comments*</b></label>
+		    <label id="comment">Yes
+				  <input type="radio" checked="checked" name="Comm" value="yesComm">
+				</label>
+				<label>No
+				  <input type="radio" name="Comm" value="noComm">
+				</label>
+		</div>
+		
+		<div class="rating">
+			<label ><b>Allow rating*</b></label>
+		    <label id="rating">Yes
+				  <input type="radio" checked="checked" name="Rat" value="yesRat">
+				</label>
+				<label>No
+				  <input type="radio" name="Rat" value="noRat">
+				</label>
+		</div>
+	    	
+	    <div class="clearfix">
+	    	<p id="message"></p>	
+	      	<button type="submit" id="addSubmit" >Add</button>
+	    </div>
+	  </div>
+	</form>
+</body>
+</html>

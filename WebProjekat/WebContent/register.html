@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Register</title>
+<link rel="icon" type="image/png" href="photos/play.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 <link rel="stylesheet" type="text/css" href="css/register.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -14,27 +15,28 @@
 	  <a class="active" href="pocetna.html"><i class="fa fa-home"></i> Home</a>
 	</div>
 	
-	<form method="GET">
+	<form>
 	  <div class="container">
 	    <h1>Register</h1>
 		
-		<label><b>Username</b></label>
-	    <input type="text" id="userNameInput" placeholder="Enter Username" name="email" required>
+		<label><b>Username*</b></label>
+	    <input type="text" id="userNameInput" placeholder="Enter Username" name="username">
 		
-		<label><b>Password</b></label>
-	    <input type="password" id="passwordInput" placeholder="Enter Password" name="password" required>
+		<label><b>Password*</b></label>
+	    <input type="password" id="passwordInput" placeholder="Enter Password" name="password">
 		
 		<label><b>Name</b></label>
-	    <input type="text" id="nameInput" placeholder="Enter Name" name="name" required>
+	    <input type="text" id="nameInput" placeholder="Enter Name" name="name">
 		
 		<label><b>Surname</b></label>
-	    <input type="text" id="surnameInput" placeholder="Enter Surname" name="surname" required>
+	    <input type="text" id="surnameInput" placeholder="Enter Surname" name="surname">
 		
-	    <label><b>Email</b></label>
-	    <input type="text" id="emailInput" placeholder="Enter Email" name="email" required>
-	
+	    <label><b>Email*</b></label>
+	    <input type="text" id="emailInput" placeholder="Enter Email" name="email">
+		
 	    <div class="clearfix">
-	      <button type="submit" id="registerSubmit" class="signupbtn">Sign Up</button>
+	    	<p id="message"></p>	
+	      	<button type="submit" id="registerSubmit" class="signupbtn">Sign Up</button>
 	    </div>
 	  </div>
 	</form>

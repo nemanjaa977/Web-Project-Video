@@ -8,7 +8,7 @@
 }
 
 body {
-	background: black;
+	 background: #e6ffe6;
 	-webkit-background-size: cover;
 	   -moz-background-size: cover;
 	     -o-background-size: cover;
@@ -28,13 +28,18 @@ body {
   padding: 14px 16px;
   text-decoration: none;
   font-size: 20px;
+  opacity: 0.8;
 }
 
-.navBar a.active {
-  background-color: #2196F3;
-  color: white;
+.navBar a:hover{
+  opacity: 1;
 }
 
+#message{
+  color: red;
+  font-style: italic;
+  font-size: 20px;
+}
 @media screen and (max-width: 600px) {
   .navBar a{
     float: none;
@@ -52,11 +57,11 @@ input[type=text], input[type=password] {
     margin: 5px 0 22px 0;
     display: inline-block;
     border: none;
-    background: #f1f1f1;
+    background: white;
 }
 
 input[type=text]:focus, input[type=password]:focus {
-    background-color: #ddd;
+    background-color: ;
     outline: none;
 }
 
@@ -82,7 +87,7 @@ button:hover {
 
 .container {
     padding: 16px;
-    background: yellow;
+    background: #e6ffe6;
     position: absolute;
     width: 50%;
     margin-left: 14%;
@@ -102,3 +107,4 @@ form {
 .container h1{
 	border-bottom: 4px solid;
 }
+

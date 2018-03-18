@@ -27,7 +27,6 @@ public class LoginServlet extends HttpServlet {
 		String korisnickoIme = request.getParameter("korisnickoIme");
 		String lozinka = request.getParameter("lozinka");
 		
-		String message = "Uspesna prijava";
 		String status = "success";
 		
 		try {
@@ -38,12 +37,10 @@ public class LoginServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("logovaniKorisnik", korisnik);
 		} catch (Exception ex) {
-			message = ex.getMessage();
 			status = "failure";
 		}
 		
 		Map<String, Object> data = new HashMap<>();
-		data.put("message", message);
 		data.put("status", status);
 
 		ObjectMapper mapper = new ObjectMapper();

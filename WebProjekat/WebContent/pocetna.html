@@ -1,63 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Lovideo</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-<link rel="stylesheet" type="text/css" href="css/pocetna.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<meta charset="UTF-8">
+	<title>Lovideo</title>
+	<link rel="icon" type="image/png" href="photos/play.png">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+	<link rel="stylesheet" type="text/css" href="css/pocetna.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="jquery-3.2.1.js"></script>
+	<script type="text/javascript" src="js/pocetna.js"></script>
 </head>
 <body>
 	<div class="navBar">
-	  <a class="active" href="pocetna.html"><i class="fa fa-home"></i> Home</a>
-	  <a href="login.html"><i class="fa fa-unlock-alt"></i> Log in</a>
-	  <a href="register.html"><i class="fa fa-user"></i> Register</a>
-	  <div class="search-container">
+	</div>
+	<div class="search-container">
 	    <form>
-	      <input type="text" placeholder="Search.." name="search">
-	      <button type="submit"><i class="fa fa-search"></i></button>
+	      <input type="text"  id="search" onkeyup="f()" placeholder="Search.." name="search">
 	    </form>
-	  </div>
 	</div>
 	<section>
-		<div class="row">
-		  <div class="column">
-		    <p><img src="photos/video.jpg"></p>
-		    <p><img id="slika" src="photos/user.png"></p>
-		    <a href="#"><p>video name</p></a>
-		    <a href="#"><p>username</p></a>
-		    <p>number of views</p>
-		    <p>creation date</p>
-		  </div>
-		  <div class="column">
-		    <p><img src="photos/video.jpg"></p>
-		    <p><img id="slika" src="photos/user.png"></p>
-		    <a href="#"><p>video name</p></a>
-		    <a href="#"><p>username</p></a>
-		    <p>number of views</p>
-		    <p>creation date</p>
-		  </div>
-		  <div class="column">
-		    <p><img src="photos/video.jpg"></p>
-		    <p><img id="slika" src="photos/user.png"></p>
-		    <a href="#"><p>video name</p></a>
-		    <a href="#"><p>username</p></a>
-		    <p>number of views</p>
-		    <p>creation date</p>
-		  </div>
-		  	 <div class="column">
-		    <p><img src="photos/video.jpg"></p>
-		    <p><img id="slika" src="photos/user.png"></p>
-		    <a href="#"><p>video name</p></a>
-		    <a href="#"><p>username</p></a>
-		    <p>number of views</p>
-		    <p>creation date</p>
-		  </div>
-		</div>
+		<div class="row"></div>
 	</section>
 	<div class="footer">
-  		<p>Copyright &copy; A web Design Company </p>
+  		<footer class="iconFoo">
+  		  <p>
+		  	Stay Connected<br>
+			Like & follow us on social networking sites to get the latest updates on movies, tv-series and news
+		  </p>
+		  <a href="#"><i class="fa fa-facebook-official"></i></a>
+		  <a href="#"><i class="fa fa-amazon"></i></a>
+		  <a href="#"><i class="fa fa-twitter"></i></a>
+		  <a href="#"><i class="fa fa-instagram"></i></a>
+		  <a href="#"><i class="fa fa-linkedin"></i></a>
+		</footer>
 	</div>
-
 </body>
 </html>

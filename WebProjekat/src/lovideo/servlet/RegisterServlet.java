@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lovideo.dao.KorisnikDAO;
+import lovideo.dao.VideoDAO;
 import lovideo.model.Korisnik;
 import lovideo.model.Korisnik.Uloga;
 
@@ -34,28 +35,25 @@ public class RegisterServlet extends HttpServlet {
 		String prezime = request.getParameter("prezime");
 		String email = request.getParameter("email");
 		
-		String message = "Uspesno ste se registrovali!";
 		String status = "success";
 
 		try {
-			if ("".equals(korisnickoIme) || "".equals(lozinka) || "".equals(ime) || "".equals(prezime) || "".equals(email))
-				throw new Exception("Niste popunili potrebna polja!");
+//			if ("".equals(korisnickoIme) || "".equals(lozinka) ||  "".equals(email))
+//				throw new Exception("Niste popunili potrebna polja!");
 
 			Korisnik existingUser = KorisnikDAO.get(korisnickoIme);
 			if (existingUser != null)
 				throw new Exception("Korisnik vec postoji!");
 			Date d=new Date();
-			d.getTime();
+			String date = KorisnikDAO.dateToStringForWrite(d);
 			
-			Korisnik noviKorisnik = new Korisnik(korisnickoIme, lozinka, ime, prezime, email, "", d, Uloga.KORISNIK, false, null, null, null);
+			Korisnik noviKorisnik = new Korisnik(korisnickoIme, lozinka, ime, prezime, email, "", date, Uloga.KORISNIK, false, null, null, null, false, 0);
 			KorisnikDAO.add(noviKorisnik);
 		} catch (Exception ex) {
-			message = ex.getMessage();
 			status = "failure";
 		}
 		
 		Map<String, Object> data = new HashMap<>();
-		data.put("message", message);
 		data.put("status", status);
 		
 		ObjectMapper mapper = new ObjectMapper();

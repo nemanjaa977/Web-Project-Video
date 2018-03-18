@@ -8,7 +8,7 @@
 body {
 	margin: 0;
 	padding: 0;
-	background: black;
+	background: #e6ffe6;
 	background-size: cover;
 }
 
@@ -25,11 +25,11 @@ body {
   padding: 14px 16px;
   text-decoration: none;
   font-size: 20px;
+  opacity: 0.8;
 }
 
-.navBar a.active {
-  background-color: #2196F3;
-  color: white;
+.navBar a:hover {
+  opacity: 1;
 }
 
 @media screen and (max-width: 600px) {
@@ -49,7 +49,7 @@ body {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	color: white;
+	color: black;
 }
 
 .login-box h1{
@@ -58,7 +58,7 @@ body {
 	border-bottom: 6px solid;
 	margin-bottom: 50px;
 	padding: 13px 0;
-	color: white;
+	color: black;
 }
 
 .textbox{
@@ -73,7 +73,7 @@ body {
 .textbox i{
 	width: 26px;
 	float: left;
-	color: white;
+	color: black;
 	text-align: center;
 }
 
@@ -81,7 +81,7 @@ body {
 	border: none;
 	outline: none;
 	background: none;
-	color: white;
+	color: black;
 	font-size: 18px;
 	width: 80%;
 	float: left;
@@ -91,9 +91,15 @@ body {
 .btn{
 	width: 100%;
 	background: none;
-	border: 2px solid #2196F3;
-	color: white;
+	border: 2px solid black;
+	color: black;
 	font-size: 18px;
 	cursor: pointer;
 	margin: 12px 0;
+}
+
+#provera{
+  	color: red;
+  	font-style: italic;
+  	font-size: 20px;
 }

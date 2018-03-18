@@ -1,0 +1,36 @@
+* {
+	margin: 0;
+	padding: 0;
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	     -o-box-sizing: border-box;
+			box-sizing: border-box;
+}
+
+body {
+	 background: #e6ffe6;
+	-webkit-background-size: cover;
+	   -moz-background-size: cover;
+	     -o-background-size: cover;
+			background-size: cover;
+}
+
+.navBar {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.navBar a {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  opacity: 0.8;
+}
+
+.navBar a:hover{
+  opacity: 1;
+}

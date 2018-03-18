@@ -14,16 +14,18 @@ public class Korisnik {
 	private String prezime;
 	private String email;
 	private String opis;
-	private Date datumRegistracije;
+	private String datumRegistracije;
 	private Uloga uloga;
 	private boolean blokiran;
 	private ArrayList<Korisnik> pratioci;
-	private Map<Video, Boolean> videoLikeDislake;
-	private Map<Komentar, Boolean> komentarLikeDislake;
+	private ArrayList<LikeDislike> likeVideo;
+	private ArrayList<LikeDislike> likeKomentar;
+	private boolean obrisan;
+	public int brojPratioca;
 	
 	public Korisnik(String korisnickoIme, String lozinka, String ime, String prezime, String email, String opis,
-			Date datumRegistracije, Uloga uloga, boolean blokiran, ArrayList<Korisnik> pratioci,
-			Map<Video, Boolean> videoLikeDislake, Map<Komentar, Boolean> komentarLikeDislake) {
+			String datumRegistracije, Uloga uloga, boolean blokiran, ArrayList<Korisnik> pratioci,
+			ArrayList<LikeDislike> likeVideo, ArrayList<LikeDislike> likeKomentar, boolean obrisan, int brojPratioca) {
 		super();
 		this.korisnickoIme = korisnickoIme;
 		this.lozinka = lozinka;
@@ -35,8 +37,10 @@ public class Korisnik {
 		this.uloga = uloga;
 		this.blokiran = blokiran;
 		this.pratioci = pratioci;
-		this.videoLikeDislake = videoLikeDislake;
-		this.komentarLikeDislake = komentarLikeDislake;
+		this.likeVideo = likeVideo;
+		this.likeKomentar = likeKomentar;
+		this.obrisan = obrisan;
+		this.brojPratioca = brojPratioca;
 	}
 
 	public String getKorisnickoIme() {
@@ -87,11 +91,11 @@ public class Korisnik {
 		this.opis = opis;
 	}
 
-	public Date getDatumRegistracije() {
+	public String getDatumRegistracije() {
 		return datumRegistracije;
 	}
 
-	public void setDatumRegistracije(Date datumRegistracije) {
+	public void setDatumRegistracije(String datumRegistracije) {
 		this.datumRegistracije = datumRegistracije;
 	}
 
@@ -119,22 +123,36 @@ public class Korisnik {
 		this.pratioci = pratioci;
 	}
 
-	public Map<Video, Boolean> getVideoLikeDislake() {
-		return videoLikeDislake;
+	public ArrayList<LikeDislike> getLikeVideo() {
+		return likeVideo;
 	}
 
-	public void setVideoLikeDislake(Map<Video, Boolean> videoLikeDislake) {
-		this.videoLikeDislake = videoLikeDislake;
+	public void setLikeVideo(ArrayList<LikeDislike> likeVideo) {
+		this.likeVideo = likeVideo;
 	}
 
-	public Map<Komentar, Boolean> getKomentarLikeDislake() {
-		return komentarLikeDislake;
+	public ArrayList<LikeDislike> getLikeKomentar() {
+		return likeKomentar;
 	}
 
-	public void setKomentarLikeDislake(Map<Komentar, Boolean> komentarLikeDislake) {
-		this.komentarLikeDislake = komentarLikeDislake;
+	public void setLikeKomentar(ArrayList<LikeDislike> likeKomentar) {
+		this.likeKomentar = likeKomentar;
 	}
-	
-	
-	
+
+	public boolean isObrisan() {
+		return obrisan;
+	}
+
+	public void setObrisan(boolean obrisan) {
+		this.obrisan = obrisan;
+	}
+
+	public int getBrojPratioca() {
+		return brojPratioca;
+	}
+
+	public void setBrojPratioca(int brojPratioca) {
+		this.brojPratioca = brojPratioca;
+	}
+		
 }

@@ -4,6 +4,7 @@ $(document).ready(function() {
 	var nameInput = $('#nameInput');
 	var surnameInput = $('#surnameInput');
 	var emailInput = $('#emailInput');
+	var message = $('#message');
 	
 	$('#registerSubmit').on('click', function(event) {
 		var userName = userNameInput.val();
@@ -11,13 +12,20 @@ $(document).ready(function() {
 		var name = nameInput.val();
 		var surname = surnameInput.val();
 		var email = emailInput.val();
+		
+		if(userName == "" || password == "" || email == ""){
+			message.text("Fields with a star are required!");
+			return false;
+		}
 	
 		$.post('RegisterServlet', {'korisnickoIme': userName, 'lozinka': password,  'ime': name, 'prezime': surname, 'email': email}, function(data) {
 			console.log(data);
 			if (data.status == 'success') {
 				window.location.replace('pocetna.html');
 			}
+			
 		});
+		
 		event.preventDefault();
 		return false;
 	});
