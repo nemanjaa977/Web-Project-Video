@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Edit user</title>
+<link rel="icon" type="image/png" href="photos/play.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<link rel="stylesheet" type="text/css" href="css/editUser.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="jquery-3.2.1.js"></script>
+<script type="text/javascript" src="js/editUser.js"></script>
+</head>
+<body>
+	<div class="navBar">
+	</div>
+	
+	<form>
+	  <div class="container">
+	    <h1>Edit user</h1>
+	    
+	    <label><b>Name</b></label>
+	    <input type="text" id="nameInput" name="name">
+	    
+	    <label><b>Surname</b></label>
+	    <input type="text" id="surnameInput" name="surname">
+	    
+	    <label id='labPass'><b>Password</b></label>
+	    <input type="password" id="passwordInput" name="password">
+	    
+	    <label><b>Description</b></label>
+	    <input type="text" id="descriptionlInput" name="description">
+		
+		<div class="roleDiv">
+			<label ><b>Role</b></label>
+		    <label id="role">Korisnik
+				  <input type="radio" checked="checked" name="Role" value="KORISNIK" id='korisnikId'>
+				</label>
+				<label>Administrator
+				  <input type="radio" name="Role" value="ADMINISTRATOR" id='adminId'>
+				</label>
+		</div>
+	    	
+	    <div class="clearfix">
+	    	<p id="message"></p>	
+	      	<button type="submit" id="editSubmit" class="okBtn">Submit</button>
+	    </div>
+	  </div>
+	</form>
+</body>
+</html>

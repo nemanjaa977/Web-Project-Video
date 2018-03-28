@@ -28,11 +28,14 @@ public class VideoPageServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+			HttpSession session = request.getSession();
 			int id=Integer.parseInt(request.getParameter("id"));
+			Korisnik logovani = (Korisnik) session.getAttribute("logovaniKorisnik");
 			Video video = VideoDAO.get(id);
 			
 			Map<String, Object> data = new HashMap<>();
 			data.put("videos", video);
+			data.put("logovani", logovani);
 			
 			ObjectMapper mapper = new ObjectMapper();
 			String jsonData = mapper.writeValueAsString(data);
@@ -92,6 +95,34 @@ public class VideoPageServlet extends HttpServlet {
 			ObjectMapper mapper = new ObjectMapper();
 			String jsonData = mapper.writeValueAsString(data);
 			System.out.println(jsonData);
+			
+		}else if(status.equals("izmena")) {
+			String opis = request.getParameter("editedDescription");
+			boolean komentari = Boolean.parseBoolean(request.getParameter("comments"));
+			String vidljivostString = request.getParameter("vid");
+			boolean rejting = Boolean.parseBoolean(request.getParameter("rating"));
+			boolean blokiran = Boolean.parseBoolean(request.getParameter("block"));
+			int id=Integer.parseInt(request.getParameter("id"));
+			
+			Vidljivost vidljivost = Vidljivost.valueOf(vidljivostString);
+				
+			Video video = VideoDAO.get(id);
+			video.setOpis(opis);
+			video.setDozvoljeniKomentari(komentari);
+			video.setVidljivost(vidljivost);
+			video.setRejtingVidljivost(rejting);
+			video.setBlokiran(blokiran);
+					
+			VideoDAO.updateVideo(video);
+			Map<String, Object> data = new HashMap<>();
+			data.put("status", "success");
+			
+			ObjectMapper mapper = new ObjectMapper();
+			String jsonData = mapper.writeValueAsString(data);
+			System.out.println(jsonData);
+
+			response.setContentType("application/json");
+			response.getWriter().write(jsonData);
 		}
 	}
 

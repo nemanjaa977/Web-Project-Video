@@ -44,16 +44,6 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>VideoPageServlet</display-name>
-    <servlet-name>VideoPageServlet</servlet-name>
-    <servlet-class>lovideo.servlet.VideoPageServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>VideoPageServlet</servlet-name>
-    <url-pattern>/VideoPageServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
     <display-name>LogOutServlet</display-name>
     <servlet-name>LogOutServlet</servlet-name>
     <servlet-class>lovideo.servlet.LogOutServlet</servlet-class>
@@ -81,5 +71,25 @@
   <servlet-mapping>
     <servlet-name>AdminServlet</servlet-name>
     <url-pattern>/AdminServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>VideoPageServlet</display-name>
+    <servlet-name>VideoPageServlet</servlet-name>
+    <servlet-class>lovideo.servlet.VideoPageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>VideoPageServlet</servlet-name>
+    <url-pattern>/VideoPageServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EditVideoServlet</display-name>
+    <servlet-name>EditVideoServlet</servlet-name>
+    <servlet-class>lovideo.servlet.EditVideoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditVideoServlet</servlet-name>
+    <url-pattern>/EditVideoServlet</url-pattern>
   </servlet-mapping>
 </web-app>

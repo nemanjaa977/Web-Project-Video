@@ -8,6 +8,8 @@ $(document).ready(function(){
 	var datum = $('#date');
 	var vlasnikIme = $('#username');
 	var opiss = $('#description');
+	var nav = $(".navBar");
+
 	
 	$.get('VideoPageServlet',{'id':id},function(data){
 		video.attr("src",data.videos.videoURL+"?rel=0&autoplay=1");
@@ -19,5 +21,21 @@ $(document).ready(function(){
 		vlasnikIme.text(data.videos.vlasnik.korisnickoIme);
 		datum.text("Published: " + data.videos.datumKreiranja);
 		opiss.text(data.videos.opis);
+		
+		if(data.logovani != null){
+			nav.append("<a class='active' href='pocetna.html'><i class='fa fa-home'></i> Home</a>" +
+					"<a href='user.html?korisnickoIme="+data.logovani.korisnickoIme+"'><i class='fa fa-user-o'></i> Profile</a>" +  //dodati da ne izlazi iz sesije
+					"<a id='editt' href='editVideo.html?id="+data.videos.id+"'><i class='fa fa-edit'></i> Edit video</a>");  //dodati da ne izlazi iz sesije
+			
+			if(data.logovani.blokiran == true){
+				$('#editt').hide();
+			}
+		}
+		
+		if(data.logovani == null){
+			nav.append('<a class="active" href="pocetna.html"><i class="fa fa-home"></i> Home</a>');
+
+		}
+		
 	});
 });

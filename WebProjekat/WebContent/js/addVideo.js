@@ -20,18 +20,23 @@ $(document).ready(function(){
 		var allowRating=true;
 		var allowComment=true;
 		var visibility = "Public";
+		
 		if(visibilityPrivate.is(':checked') == true ){
 			visibility="Private";
 		}
+		
 		if(visibilityUnlisted.is(':checked') == true ){
 			visibility="Unlisted";
 		}
+		
 		if(allowRatingNo.is(':checked') == true){
 			allowRating = false;
 		}
+		
 		if(allowCommNo.is(':checked') == true){
 			allowComment = false;
 		}
+		
 		if(URLValue == "" || NAMEValue == ""){
 			message.text("Url and name can't be empty!");
 			return false;
@@ -48,7 +53,6 @@ $(document).ready(function(){
 		};
 		
 		$.post('VideoPageServlet',params,function(data){
-			console.log("Uspehh");
 			if(data.status == "success"){
 				alert("Uspesno dodato");
 			}

@@ -34,6 +34,7 @@ public class RegisterServlet extends HttpServlet {
 		String ime = request.getParameter("ime");
 		String prezime = request.getParameter("prezime");
 		String email = request.getParameter("email");
+		String opis = request.getParameter("opis");
 		
 		String status = "success";
 
@@ -47,7 +48,7 @@ public class RegisterServlet extends HttpServlet {
 			Date d=new Date();
 			String date = KorisnikDAO.dateToStringForWrite(d);
 			
-			Korisnik noviKorisnik = new Korisnik(korisnickoIme, lozinka, ime, prezime, email, "", date, Uloga.KORISNIK, false, null, null, null, false, 0);
+			Korisnik noviKorisnik = new Korisnik(korisnickoIme, lozinka, ime, prezime, email, opis, date, Uloga.KORISNIK, false, null, null, null, false, 0);
 			KorisnikDAO.add(noviKorisnik);
 		} catch (Exception ex) {
 			status = "failure";

@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lovideo.dao.KorisnikDAO;
 import lovideo.dao.VideoDAO;
 import lovideo.model.Korisnik;
+import lovideo.model.Korisnik.Uloga;
 import lovideo.model.Video;
 
 
@@ -63,8 +64,79 @@ public class KorisnikServlet extends HttpServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		String status = request.getParameter("status");
+		
+		if(status.equals("brisanje")) {
+			String korIme = request.getParameter("korisnikIme");
+			Korisnik k = KorisnikDAO.get(korIme);
+			k.setObrisan(true);
+			KorisnikDAO.update(k);
+			Map<String, Object> data = new HashMap<>();
+			
+			data.put("status", "success");
+			ObjectMapper mapper = new ObjectMapper();
+			String jsonData = mapper.writeValueAsString(data);
+			System.out.println(jsonData);
+
+			response.setContentType("application/json");
+			response.getWriter().write(jsonData);
+			
+		}else if(status.equals("blokiranje")){
+			String korIme = request.getParameter("korIme");
+			Korisnik k = KorisnikDAO.get(korIme);
+			k.setBlokiran(true);
+			KorisnikDAO.update(k);
+			Map<String, Object> data = new HashMap<>();
+			
+			data.put("status", "success");
+			ObjectMapper mapper = new ObjectMapper();
+			String jsonData = mapper.writeValueAsString(data);
+			System.out.println(jsonData);
+
+			response.setContentType("application/json");
+			response.getWriter().write(jsonData);
+		}else if(status.equals("odblokiranje")){
+			String korIme = request.getParameter("korIme");
+			Korisnik k = KorisnikDAO.get(korIme);
+			k.setBlokiran(false);
+			KorisnikDAO.update(k);
+			Map<String, Object> data = new HashMap<>();
+			
+			data.put("status", "success");
+			ObjectMapper mapper = new ObjectMapper();
+			String jsonData = mapper.writeValueAsString(data);
+			System.out.println(jsonData);
+
+			response.setContentType("application/json");
+			response.getWriter().write(jsonData);
+		}else if(status.equals("izmena")){
+			String lozinka = request.getParameter("editedPassword");
+			String opis = request.getParameter("editedDescription");
+			String ime = request.getParameter("editedName");
+			String prezime = request.getParameter("editedSurname");
+			String ulogaString = request.getParameter("role");
+			String korIme = request.getParameter("korIme");
+			
+			Uloga uloga =Uloga.valueOf(ulogaString);
+			
+			Korisnik k = KorisnikDAO.get(korIme);
+			k.setIme(ime);
+			k.setLozinka(lozinka);
+			k.setPrezime(prezime);
+			k.setOpis(opis);
+			k.setUloga(uloga);
+			
+			KorisnikDAO.update(k);
+			Map<String, Object> data = new HashMap<>();
+			
+			data.put("status", "success");
+			ObjectMapper mapper = new ObjectMapper();
+			String jsonData = mapper.writeValueAsString(data);
+			System.out.println(jsonData);
+
+			response.setContentType("application/json");
+			response.getWriter().write(jsonData);
+		}
 	}
 
 }

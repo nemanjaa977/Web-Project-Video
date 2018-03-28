@@ -13,6 +13,63 @@
 <body>
 	<div class="navBar">
 	</div>
+	
+	<form>
+	  <div class="container">
+	    <h1>Edit video</h1>
+	    
+		<label><b>Description</b></label>
+	    <input type="text" id="descrip" name="description">
+	    
+	    <div class="visibi">
+		    <label><b>Visibility</b></label>
+		    <label id="visib">Public
+				  <input type="radio" checked="checked" name="visibility" value="PUBLIC" id='checkPublic'>
+				</label>
+				<label>Private
+				  <input type="radio" name="visibility" value="PRIVATE" id='checkPrivate'>
+				</label>
+				<label>Unlisted
+				  <input type="radio" name="visibility" value="UNLISTED" id='checkUnlisted'>
+				</label>
+		</div>
+		
+		<div class="comment">
+			<label><b>Allow comments</b></label>
+		    <label id="comment">Yes
+				  <input type="radio" checked="checked" name="Comm" value="true" id='yesComm'>
+				</label>
+				<label>No
+				  <input type="radio" name="Comm" value="false" id='noComm'>
+				</label>
+		</div>
+		
+		<div class="rating">
+			<label ><b>Allow rating</b></label>
+		    <label id="rating">Yes
+				  <input type="radio" checked="checked" name="Rat" value="true" id='yesRating'>
+				</label>
+				<label>No
+				  <input type="radio" name="Rat" value="false" id='noRating'>
+				</label>
+		</div>
+		
+		<div class="blockVideo">
+			<label ><b>Block</b></label>
+		    <label id="block">Yes
+				  <input type="radio" checked="checked" name="Block" value="true" id='yesBlock'>
+				</label>
+				<label>No
+				  <input type="radio" name="Block" value="false" id='noBlock'>
+				</label>
+		</div>
+	    	
+	    <div class="clearfix">
+	    	<p id="message"></p>	
+	      	<button type="submit" id=" class="okBtn">Submit</button>
+	    </div>
+	  </div>
+	</form>
 
 </body>
 </html>

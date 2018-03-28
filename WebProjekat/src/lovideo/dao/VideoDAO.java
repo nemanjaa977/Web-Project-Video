@@ -284,10 +284,9 @@ public class VideoDAO {
 		Connection conn = ConnectionManager.getConnection();
 		PreparedStatement pstmt = null;
 		try {
-			String query = "UPDATE videos SET nazivVideo = ?, opis = ?, vidljivost = ?, dozvoljeniKomentari = ?, rejtingVidljivost = ?, blokiran = ?, obrisan = ?, brojPregleda = ?, brojLike = ?, brojDislike = ?  WHERE id = ?";
+			String query = "UPDATE videos SET opis = ?, vidljivost = ?, dozvoljeniKomentari = ?, rejtingVidljivost = ?, blokiran = ?, obrisan = ?, brojPregleda = ?, brojLike = ?, brojDislike = ?  WHERE id = ?";
 			pstmt = conn.prepareStatement(query);
 			int index = 1;
-			pstmt.setString(index++, video.getNazivVideo());
 			pstmt.setString(index++, video.getOpis());
 			pstmt.setString(index++, video.getVidljivost().toString());
 			pstmt.setBoolean(index++, video.isDozvoljeniKomentari());

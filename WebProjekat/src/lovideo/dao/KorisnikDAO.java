@@ -131,6 +131,36 @@ public class KorisnikDAO {
 		return false;
 	}
 	
+	public static boolean update(Korisnik korisnik) {
+		Connection conn = ConnectionManager.getConnection();
+		
+		PreparedStatement pstmt = null;
+		try {
+			String query = "UPDATE users SET lozinka = ?, ime = ?, prezime = ?, opis = ?, uloga = ?, blokiran = ?, obrisan = ? WHERE korisnickoIme = ?";
+
+			pstmt = conn.prepareStatement(query);
+			int index = 1;
+			pstmt.setString(index++, korisnik.getLozinka());
+			pstmt.setString(index++, korisnik.getIme());
+			pstmt.setString(index++, korisnik.getPrezime());
+			pstmt.setString(index++, korisnik.getOpis());
+			pstmt.setString(index++, korisnik.getUloga().toString());
+			pstmt.setBoolean(index++, korisnik.isBlokiran());
+			pstmt.setBoolean(index++, korisnik.isObrisan());
+			pstmt.setString(index++, korisnik.getKorisnickoIme());
+			
+			return pstmt.executeUpdate() == 1;
+			
+		} catch (SQLException ex) {
+			System.out.println("Greska u SQL upitu!");
+			ex.printStackTrace();
+		} finally {
+			try {pstmt.close();} catch (SQLException ex1) {ex1.printStackTrace();}
+		}
+
+		return false;
+	}
+	
 	public static String dateToString(Date date) {
 		SimpleDateFormat formatvr = new SimpleDateFormat("dd.MM.yyyy");
 		String datum;
