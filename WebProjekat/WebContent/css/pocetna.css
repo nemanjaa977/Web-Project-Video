@@ -60,6 +60,28 @@ body{
 	text-align:center;
 }
 
+#sortDiv #sort{
+	display: inline-block;
+	font-size: 20px;
+}
+
+#sortDiv .nameSort{
+	display: inline-block;
+	font-size: 15px;
+}
+
+#sortDiv .ascDesc{
+	font-size: 15px;
+	display: inline-block;
+}
+
+#sortDiv #okSort{
+	border: none;
+	font-size: 15px;
+	background: white;
+	cursor: pointer;
+}
+
 .footer {
    left: 0;
    bottom: 0;

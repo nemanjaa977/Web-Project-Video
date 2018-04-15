@@ -16,7 +16,7 @@ $(document).ready(function(e) {
       					"<div>" + 
       					"<p><img src="+data.videos[i].slicica+"></p>" +
       					"<a href='video.html?videoName="+data.videos[i].id+"' style='border:none; background:none; cursor:pointer'><p id='videoName'>"+data.videos[i].nazivVideo+"</p></a>" +
-      					"<p>"+data.videos[i].brojPregleda+" views</p>" +
+      					"<p id='brPregleda'>"+data.videos[i].brojPregleda+" views</p>" +
       					"<p>Date: "+data.videos[i].datumKreiranja+"</p>" +
       					"</div>" +
       					"<div class='brisanje'>" +
@@ -108,6 +108,25 @@ $(document).ready(function(e) {
 		
 	});
 	
+$(document).on('click',"#okSort", function(event){
+		
+		var ascDesc=$(".ascDesc").val();
+		var sortBy=$(".nameSort").val();
+		console.log(ascDesc);
+		console.log(sortBy);
+		if(ascDesc =="Ascending"){
+			if(sortBy == "brojPregleda"){
+				sortBrojPregledaA();
+			}
+		}else{
+			if(sortBy == "brojPregleda"){
+				sortBrojPregledaD();
+			}	
+		}
+		event.preventDefault;
+		return false;
+	});
+	
 });
 
 function myFunction() {
@@ -127,3 +146,23 @@ window.onclick = function(event) {
 	    }
 	  }
 	}
+
+function sortBrojPregledaA(){
+	 $('.maliDiv').sort(function(a, b) {
+		  if ($(a).find('#brPregleda').text() < $(b).find('#brPregleda').text()) {
+		    return -1;
+		  } else {
+		    return 1;
+		  }
+	}).appendTo('.glavniDiv');
+}
+
+function sortBrojPregledaD(){
+	 $('.maliDiv').sort(function(a, b) {
+		  if ($(a).find('#brPregleda').text() > $(b).find('#brPregleda').text()) {
+		    return -1;
+		  } else {
+		    return 1;
+		  }
+	}).appendTo('.glavniDiv');
+}

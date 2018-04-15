@@ -17,7 +17,7 @@ $(document).ready(function(e) {
         					"<p id='surname'>Surname: "+data.korisnici[i].prezime+"</p>" +
         					"<p id='email'>Email: "+data.korisnici[i].email+"</p>" +
         					"<p id='role'>Role: "+data.korisnici[i].uloga+"</p>" +
-        					"<p><button class='button' name="+data.korisnici[i].korisnickoIme+">Delete</button></p>" +
+        					"<p><button class='button' name="+data.korisnici[i].korisnickoIme+"><i class='fa fa-trash'></i> Delete</button></p>" +
         					"<p><button class='buttonn' name="+data.korisnici[i].korisnickoIme+">Block</button></p>" +
         					"<p><button class='buttonnn' name="+data.korisnici[i].korisnickoIme+">Unblock</button></p>" +
       					"</div>" +
@@ -62,6 +62,42 @@ $(document).ready(function(e) {
 		return false;
 	});
 	
+	$(document).on('click',"#okSort", function(event){
+		
+		var ascDesc=$(".ascDesc").val();
+		var sortBy=$(".nameSort").val();
+		console.log(ascDesc);
+		console.log(sortBy);
+		if(ascDesc =="Ascending"){
+			if(sortBy == "username"){
+				sortUsernameA();
+			}else if(sortBy == "name"){
+				sortNameA();
+			}else if(sortBy == "surname"){
+				sortSurnameA();
+			}else if(sortBy == "email"){
+				sortEmailA();
+			}else{
+				sortRoleA();
+			}
+		}else{
+			if(sortBy == "username"){
+				sortUsernameD();
+			}else if(sortBy == "name"){
+				sortNameD();
+			}else if(sortBy == "surname"){
+				sortSurnameD();
+			}else if(sortBy == "email"){
+				sortEmailD();
+			}else{
+				sortRoleD();
+			}
+			
+		}
+		event.preventDefault;
+		return false;
+	});
+	
 });
 
 function f(){
@@ -74,4 +110,104 @@ function f(){
 			$(this).hide();
 		  }
 	});
+}
+
+function sortUsernameA(){
+	 $('.column').sort(function(a, b) {
+		  if ($(a).find('#username').text() < $(b).find('#username').text()) {
+		    return -1;
+		  } else {
+		    return 1;
+		  }
+	}).appendTo('.row');
+}
+
+function sortNameA(){
+	 $('.column').sort(function(a, b) {
+		  if ($(a).find('#name').text() < $(b).find('#name').text()) {
+		    return -1;
+		  } else {
+		    return 1;
+		  }
+	}).appendTo('.row');
+}
+
+function sortSurnameA(){
+	 $('.column').sort(function(a, b) {
+		  if ($(a).find('#surname').text() < $(b).find('#surname').text()) {
+		    return -1;
+		  } else {
+		    return 1;
+		  }
+	}).appendTo('.row');
+}
+
+function sortEmailA(){
+	 $('.column').sort(function(a, b) {
+		  if ($(a).find('#email').text() < $(b).find('#email').text()) {
+		    return -1;
+		  } else {
+		    return 1;
+		  }
+	}).appendTo('.row');
+}
+
+function sortRoleA(){
+	 $('.column').sort(function(a, b) {
+		  if ($(a).find('#role').text() < $(b).find('#role').text()) {
+		    return -1;
+		  } else {
+		    return 1;
+		  }
+	}).appendTo('.row');
+}
+
+function sortUsernameD(){
+	 $('.column').sort(function(a, b) {
+		  if ($(a).find('#username').text() > $(b).find('#username').text()) {
+		    return -1;
+		  } else {
+		    return 1;
+		  }
+	}).appendTo('.row');
+}
+
+function sortNameD(){
+	 $('.column').sort(function(a, b) {
+		  if ($(a).find('#name').text() > $(b).find('#name').text()) {
+		    return -1;
+		  } else {
+		    return 1;
+		  }
+	}).appendTo('.row');
+}
+
+function sortSurnameD(){
+	 $('.column').sort(function(a, b) {
+		  if ($(a).find('#surname').text() > $(b).find('#surname').text()) {
+		    return -1;
+		  } else {
+		    return 1;
+		  }
+	}).appendTo('.row');
+}
+
+function sortEmailD(){
+	 $('.column').sort(function(a, b) {
+		  if ($(a).find('#email').text() > $(b).find('#email').text()) {
+		    return -1;
+		  } else {
+		    return 1;
+		  }
+	}).appendTo('.row');
+}
+
+function sortRoleD(){
+	 $('.column').sort(function(a, b) {
+		  if ($(a).find('#role').text() > $(b).find('#role').text()) {
+		    return -1;
+		  } else {
+		    return 1;
+		  }
+	}).appendTo('.row');
 }
