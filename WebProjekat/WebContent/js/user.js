@@ -149,7 +149,7 @@ window.onclick = function(event) {
 
 function sortBrojPregledaA(){
 	 $('.maliDiv').sort(function(a, b) {
-		  if ($(a).find('#brPregleda').text() < $(b).find('#brPregleda').text()) {
+		 if (parseInt($(a).find('#brPregleda').text()) < parseInt($(b).find('#brPregleda').text())) {
 		    return -1;
 		  } else {
 		    return 1;
@@ -159,7 +159,7 @@ function sortBrojPregledaA(){
 
 function sortBrojPregledaD(){
 	 $('.maliDiv').sort(function(a, b) {
-		  if ($(a).find('#brPregleda').text() > $(b).find('#brPregleda').text()) {
+		 if (parseInt($(a).find('#brPregleda').text()) > parseInt($(b).find('#brPregleda').text())) {
 		    return -1;
 		  } else {
 		    return 1;

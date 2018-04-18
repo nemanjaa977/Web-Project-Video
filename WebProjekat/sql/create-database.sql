@@ -55,3 +55,19 @@ INSERT INTO videos(videoUrl,slicica,nazivVideo,opis,vidljivost,dozvoljeniKomenta
 INSERT INTO videos(videoUrl,slicica,nazivVideo,opis,vidljivost,dozvoljeniKomentari,brojLike,brojDislike
 ,blokiran,rejtingVidljivost,brojPregleda,datumKreiranja,obrisan,vlasnik) VALUES('https://www.youtube.com/embed/23VflsU3kZE','photos/Zac.jpg','San Andreas - Official Trailer 2 [HD]',
 'The best movie!','PUBLIC',true,0,0,false,true,500,'2018-2-4',false,'mare');
+
+CREATE TABLE likeDislike(
+	id BIGINT AUTO_INCREMENT,
+	lajkovan BOOLEAN NOT NULL,
+	datumKreiranja DATE NOT NULL,
+	vlasnik VARCHAR(15),
+	PRIMARY KEY (id),
+	FOREIGN KEY (vlasnik) REFERENCES users(korisnickoIme) ON DELETE RESTRICT
+);
+
+CREATE TABLE likeDislikeVideo(
+	likeId BIGINT,
+	videoId BIGINT,
+	FOREIGN KEY (likeId) REFERENCES likeDislike (id) ON DELETE RESTRICT,
+	FOREIGN KEY (videoId) REFERENCES videos(id) ON DELETE RESTRICT
+);

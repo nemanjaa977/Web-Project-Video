@@ -109,7 +109,7 @@ function sortOwnerD(){
 
 function sortBrojPregledaA(){
 	 $('.column').sort(function(a, b) {
-		  if ($(a).find('#views').text() < $(b).find('#views').text()) {
+		  if (parseInt($(a).find('#views').text()) < parseInt($(b).find('#views').text())) {
 		    return -1;
 		  } else {
 		    return 1;
@@ -119,7 +119,7 @@ function sortBrojPregledaA(){
 
 function sortBrojPregledaD(){
 	 $('.column').sort(function(a, b) {
-		  if ($(a).find('#views').text() > $(b).find('#views').text()) {
+		  if (parseInt($(a).find('#views').text()) > parseInt($(b).find('#views').text())) {
 		    return -1;
 		  } else {
 		    return 1;

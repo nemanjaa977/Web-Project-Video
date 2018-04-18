@@ -92,4 +92,14 @@
     <servlet-name>EditVideoServlet</servlet-name>
     <url-pattern>/EditVideoServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LikeDislikeServlet</display-name>
+    <servlet-name>LikeDislikeServlet</servlet-name>
+    <servlet-class>lovideo.servlet.LikeDislikeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LikeDislikeServlet</servlet-name>
+    <url-pattern>/LikeDislikeServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

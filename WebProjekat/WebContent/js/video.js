@@ -5,6 +5,8 @@ $(document).ready(function(){
 	var pregled = $('#numberVievs');
 	var like = $('#likeNumber');
 	var dislike = $('#dislikeNumber');
+	var lajkic = $('#lajkic');
+	var dislajkic = $('#dislajkic');
 	var datum = $('#date');
 	var vlasnikIme = $('#username');
 	var opiss = $('#description');
@@ -30,6 +32,24 @@ $(document).ready(function(){
 			if(data.logovani.blokiran == true){
 				$('#editt').hide();
 			}
+			
+			lajkic.on('click',function(event){		
+				$.get('LikeDislikeServlet',{'id':data.videos.id},function(data){
+						like.text(data.brojLajka);
+						dislike.text(data.brojDislajka);			
+				});		
+					event.preventDefault();
+					return false;
+				});
+			
+			dislajkic.on('click',function(event){		
+				$.post('LikeDislikeServlet',{'id':data.videos.id},function(data){
+						like.text(data.brojLajka);
+						dislike.text(data.brojDislajka);			
+				});		
+					event.preventDefault();
+					return false;
+				});
 		}
 		
 		if(data.logovani == null){
