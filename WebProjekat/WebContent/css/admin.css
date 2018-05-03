@@ -13,7 +13,7 @@ body {
 	margin: 0;
 	padding: 0;
 	background-size: cover;
-  background: #e6ffe6;
+  background: white;
 }
 
 .navBar {
@@ -29,10 +29,11 @@ body {
   padding: 14px 16px;
   text-decoration: none;
   font-size: 20px;
+  border-right: 1px solid white; 
 }
 
 .search-container input[type=text] {
-  padding: 7px;
+  padding: 6px;
   margin-top: 10px;
   font-size: 20px;
   border: 1px solid #333;
@@ -45,7 +46,8 @@ body {
 .search-container{
 	text-align:center;
 	display: inline-block;
-	width: 50%;
+	width: 40%;
+	margin: 1%;
 }
 
 #sortDiv{
@@ -54,24 +56,27 @@ body {
 
 #sortDiv #sort{
 	display: inline-block;
-	font-size: 20px;
+	font-size: 23px;
+	color: #333;
 }
 
 #sortDiv .nameSort{
 	display: inline-block;
-	font-size: 15px;
+	font-size: 18px;
+	color: #333;
 }
 
 #sortDiv .ascDesc{
-	font-size: 15px;
+	font-size: 18px;
 	display: inline-block;
+	color: #333;
 }
 
 #sortDiv #okSort{
-	border: none;
-	font-size: 15px;
+	font-size: 18px;
 	background: white;
 	cursor: pointer;
+	color: #333;
 }
 
 .column {
@@ -83,7 +88,7 @@ body {
 }
 
 .column .card{
-  background: #e6e6e6;
+  background: #f2f2f2;
 }
 
 .card {

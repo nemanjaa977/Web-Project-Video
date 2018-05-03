@@ -11,18 +11,28 @@ $(document).ready(function(){
 	var vlasnikIme = $('#username');
 	var opiss = $('#description');
 	var nav = $(".navBar");
+	var slika = $("#slika");
+	var subscribe = $('#subscribe');
 
 	
 	$.get('VideoPageServlet',{'id':id},function(data){
 		video.attr("src",data.videos.videoURL+"?rel=0&autoplay=1");
 		videoName.text(data.videos.nazivVideo);
 		pregled.text(data.videos.brojPregleda + " views");
-		like.text(data.videos.brojLike);
+		like.text(data.videos.brojLike);								
 		dislike.text(data.videos.brojDislike);
 		
-		vlasnikIme.text(data.videos.vlasnik.korisnickoIme);
+		slika.attr("src",data.videos.vlasnik.slicica);
+		vlasnikIme.text(data.videos.vlasnik.korisnickoIme);   //staviti da ide na stranicu korisnika a ne da ponoovo ucita video
 		datum.text("Published: " + data.videos.datumKreiranja);
 		opiss.text(data.videos.opis);
+		
+		//kad ucita stranicu
+		if(data.isSubscribe == false){
+			subscribe.text("Subscribe");
+		}else{
+			subscribe.text("Unsubscribe");
+		}
 		
 		if(data.logovani != null){
 			nav.append("<a class='active' href='pocetna.html'><i class='fa fa-home'></i> Home</a>" +
@@ -50,6 +60,21 @@ $(document).ready(function(){
 					event.preventDefault();
 					return false;
 				});
+			
+			$('#subscribe').on("click",function(event){
+				var korisnik = data.videos.vlasnik.korisnickoIme;
+				var subskrajber = data.logovani.korisnickoIme;
+				$.get('SubscribeServlet',{'korisnik':korisnik,'subskrajber':subskrajber},function(data){
+						if(data.status == "Unsubscribe"){
+							$('#subscribe').text("Subscribe");
+						}else{
+							$('#subscribe').text("Unsubscribe");
+						}
+						
+				});
+				event.preventDefault;
+				return false;
+			});
 		}
 		
 		if(data.logovani == null){

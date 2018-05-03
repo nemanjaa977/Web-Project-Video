@@ -54,7 +54,8 @@ $(document).ready(function(){
 		
 		$.post('VideoPageServlet',params,function(data){
 			if(data.status == "success"){
-				alert("Uspesno dodato");
+				var location="user.html?korisnickoIme="+korisnickoIme;
+				window.location.replace(location);
 			}
 		});
 		

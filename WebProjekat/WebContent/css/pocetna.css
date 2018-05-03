@@ -13,7 +13,7 @@ html{
 
 body{
   min-height: 100%;
-  background: #e6ffe6; 
+  background: white; 
 }
 
 .navBar {
@@ -31,6 +31,7 @@ body{
   text-decoration: none;
   font-size: 20px;
   opacity: 0.8;
+  border-left: 1px solid white; 
 }
 
 .navBar a:hover {
@@ -44,13 +45,14 @@ body{
   font-size: 22px;
   font-style: italic;
   cursor: pointer;
+  border: none;
 }
 .search-container input[type=text] {
-  padding: 7px;
+  padding: 6px;
   margin-top: 10px;
   font-size: 20px;
   border: 1px solid #333;
-  width: 30%;
+  width: 70%;
   background: white;
   color: #333;
   border-radius: 2%;
@@ -58,28 +60,41 @@ body{
 
 .search-container{
 	text-align:center;
+	display: inline-block;
+	margin: 2%;
+	width: 40%;
+}
+
+#sortDiv{
+	display: inline-block;
+	float: right;
+	margin: 3%;
 }
 
 #sortDiv #sort{
 	display: inline-block;
-	font-size: 20px;
+	font-size: 23px;
+	color: #333;
 }
 
 #sortDiv .nameSort{
 	display: inline-block;
-	font-size: 15px;
+	font-size: 18px;
+	color: #333;
 }
 
 #sortDiv .ascDesc{
-	font-size: 15px;
+	font-size: 18px;
 	display: inline-block;
+	color: #333;
 }
 
 #sortDiv #okSort{
-	border: none;
-	font-size: 15px;
+	font-size: 18px;
 	background: white;
 	cursor: pointer;
+	color: #333;
+	
 }
 
 .footer {
@@ -95,7 +110,7 @@ body{
 }
 
 .column {
-	 -ms-flex: 25%; 
+	-ms-flex: 25%; 
     flex: 25%;
     max-width: 25%;
     padding: 0 4px;
@@ -103,7 +118,7 @@ body{
 }
 
 .row {
-	  display: -ms-flexbox; 
+	display: -ms-flexbox; 
     display: flex;
     -ms-flex-wrap: wrap; 
     flex-wrap: wrap;
@@ -113,7 +128,7 @@ body{
 }
 
 .column img {
-	width: 65%;
+	width: 90%;
 	opacity: 0.9;
 	border-radius: 5%;
 }

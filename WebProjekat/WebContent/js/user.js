@@ -7,6 +7,9 @@ $(document).ready(function(e) {
 	var linkNav = $("#linkovi");
 	var bars = $('#myDropdown');
 	var buttonAdd = $('.new');
+	var subDiv = $("#subProfile");
+	var izaberiSub = $('#naslovSubb');
+	var closeSubb = $('#closeSub');
 	
 	$.get('KorisnikServlet',{'korisnickoIme':korisnickoIme},function(data){
 		for(i in data.videos){
@@ -28,13 +31,13 @@ $(document).ready(function(e) {
 		
 		buttonAdd.hide();
 			
-		userDiv.append("<p><img id='slika' src="+''+"></p>" +
+		userDiv.append("<p><img id='slika' src="+data.vlasnik.slicica+"></p>" + 
 				"<a class='username' href='user.html?username="+data.vlasnik.korisnickoIme+"'><p>"+data.vlasnik.korisnickoIme+"<p></a>" +
 				"<div class='subscribe'>" +
 					"<button id='btnsub'></button>" +
 				"</div>" +
 				"<div class='pregled'>" +
-					"<p>Number of followers: "+data.vlasnik.brojPratioca+"</p>" +
+					"<p id='subFollow'>Number of followers: "+data.vlasnik.brojPratioca+"</p>" +
 					"<p class='dateR'>Registered: "+data.vlasnik.datumRegistracije+"</p>" +
 				"</div>");
 		
@@ -46,6 +49,32 @@ $(document).ready(function(e) {
 		}else{
 			blok.text("Not blocked");
 		}
+		
+		//kad ucita stranicu
+		if(data.isSubscribe == false){
+			$('#btnsub').text("Subscribe");
+		}else{
+			$('#btnsub').text("Unsubscribe");
+		}
+		
+		for(j in data.subskrajberi){
+			subDiv.append("<div class='subb'>" +
+										"<p><img src="+data.subskrajberi[j].slicica+"></p>" +
+										"<a class='subUser' href='user.html?korisnickoIme="+data.subskrajberi[j].korisnickoIme+"'><p>"+data.subskrajberi[j].korisnickoIme+"</p></a>" +
+										"<p class='viewsSub'>Subscriber's: "+data.subskrajberi[j].brojPratioca+"</p>" +
+									"</div>");
+		}
+		
+		izaberiSub.on("click", function(event){
+			subDiv.show();
+			closeSubb.show();
+		});
+		
+		closeSubb.on("click", function(event){
+			subDiv.hide();	
+			closeSubb.hide();
+		});	
+		
 			
 		if(data.logovani != null){
 			linkNav.append('<a href="pocetna.html"><i class="fa fa-home"></i> Home</a> <a href="LogOutServlet"><i class="fa fa-angle-double-down"></i> Log Out </a> <a href="user.html?korisnickoIme='+data.logovani.korisnickoIme+'"><i class="fa fa-user-o"></i> Profile </a>');
@@ -70,6 +99,23 @@ $(document).ready(function(e) {
 					return false;
 				});
 			}
+			
+			$('#btnsub').on("click",function(event){
+				var korisnik=data.vlasnik.korisnickoIme;
+				var subskrajber=data.logovani.korisnickoIme;
+				$.get('SubscribeServlet',{'korisnik':korisnik,'subskrajber':subskrajber},function(data){
+						$('#subFollow').text("Number of followers:" + data.brojSubova);
+						//kad klikne na dugme
+						if(data.status == "Unsubscribe"){
+							$('#btnsub').text("Subscribe");
+						}else{
+							$('#btnsub').text("Unsubscribe");
+						}
+						
+				});
+				event.preventDefault;
+				return false;
+			});
 			
 			if(data.logovani.blokiran == true){
 				buttonAdd.hide();

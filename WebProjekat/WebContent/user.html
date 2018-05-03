@@ -24,28 +24,34 @@
 	   <p id="kaoOpis"></p>
    </nav>
    <section id="glavniS">
-   <div class="new">
-   		<button onclick="myFunction()" class="dropbtn"><i class="fa fa-bars"></i></button>
-	    <div class="dropdown-content" id="myDropdown">
-	    </div>
-   </div>
-    <div id='sortDiv'>
-	  	<p id='sort'>Sort by</p>
-	  	<select class='nameSort'>
-	  		<option value="brojPregleda">Number of views</option>
-	  		<option value="date">Creation date</option>
-	  	</select>
-	  	<select class="ascDesc">
-	  		<option value="Ascending">Ascending</option>
-	  		<option value="Descending">Descending</option>
-	  	</select>
-	  	<button id='okSort'>Ok</button>
-	  </div>
-   	<div class="glavniDiv">
-	</div>
-	<div id="overlay" style="width: 70%;">
-		<h1>User is blocked!</h1>
-	</div>
+	   <div class="new">
+	   		<button onclick="myFunction()" class="dropbtn"><i class="fa fa-bars"></i></button>
+		    <div class="dropdown-content" id="myDropdown">
+		    </div>
+	   </div>
+	    <div id='sortDiv'>
+		  	<p id='sort'>Sort by</p>
+		  	<select class='nameSort'>
+		  		<option value="brojPregleda">Number of views</option>
+		  		<option value="date">Creation date</option>
+		  	</select>
+		  	<select class="ascDesc">
+		  		<option value="Ascending">Ascending</option>
+		  		<option value="Descending">Descending</option>
+		  	</select>
+		  	<button id='okSort'><i class="fa fa-check"></i></button>
+		 </div>
+	   	<div class="glavniDiv">
+		</div>
+		<div id="subMargin">
+			<p id="naslovSubb">Subscribes</p>
+			<button id="closeSub">(close)</button>
+		</div>
+		<div id="subProfile">
+		</div>
+		<div id="overlay" style="width: 70%;">
+			<h1>User is blocked!</h1>
+		</div>
    </section>
 </body>
 </html>

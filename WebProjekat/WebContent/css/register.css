@@ -8,7 +8,7 @@
 }
 
 body {
-	 background: #e6ffe6;
+	 background: white;
 	-webkit-background-size: cover;
 	   -moz-background-size: cover;
 	     -o-background-size: cover;
@@ -29,6 +29,7 @@ body {
   text-decoration: none;
   font-size: 20px;
   opacity: 0.8;
+  border-right: 1px solid white;
 }
 
 .navBar a:hover{
@@ -57,7 +58,7 @@ input[type=text], input[type=password] {
     margin: 5px 0 22px 0;
     display: inline-block;
     border: none;
-    background: white;
+    background: #f2f2f2;
 }
 
 input[type=text]:focus, input[type=password]:focus {
@@ -86,8 +87,8 @@ button:hover {
 }
 
 .container {
-    padding: 16px;
-    background: #e6ffe6;
+    padding: 15px;
+    background: white;
     position: absolute;
     width: 50%;
     margin-left: 14%;
@@ -105,6 +106,7 @@ form {
 }
 
 .container h1{
-	border-bottom: 4px solid;
+	border-bottom: 4px solid #333;
+	color: #333;
 }
 

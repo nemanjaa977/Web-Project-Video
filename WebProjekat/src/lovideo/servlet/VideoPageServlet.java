@@ -19,23 +19,34 @@ import lovideo.model.Korisnik;
 import lovideo.model.Video;
 import lovideo.model.Video.Vidljivost;
 
-/**
- * Servlet implementation class VideoPageServlet
- */
+
 public class VideoPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		boolean isSubscribe=false;
 		try {
 			HttpSession session = request.getSession();
 			int id=Integer.parseInt(request.getParameter("id"));
 			Korisnik logovani = (Korisnik) session.getAttribute("logovaniKorisnik");
 			Video video = VideoDAO.get(id);
 			
+			if(logovani != null) {
+				if(!logovani.getKorisnickoIme().equals(video.getVlasnik().getKorisnickoIme())) {
+					int subs=KorisnikDAO.findSubscribed(video.getVlasnik().getKorisnickoIme(), logovani.getKorisnickoIme());
+					if(subs != 0) {
+						isSubscribe = true;
+					}
+				}
+			}
+			
+			video.setBrojPregleda(video.getBrojPregleda()+1);
+			VideoDAO.updateVideo(video);
 			Map<String, Object> data = new HashMap<>();
 			data.put("videos", video);
 			data.put("logovani", logovani);
+			data.put("isSubscribe", isSubscribe);
 			
 			ObjectMapper mapper = new ObjectMapper();
 			String jsonData = mapper.writeValueAsString(data);
@@ -72,7 +83,7 @@ public class VideoPageServlet extends HttpServlet {
 			
 			int id =VideoDAO.getVideoId();
 			Date d=new Date();
-			Video v=new Video(id, url, "photos/Zac.jpg", name, description, visibility, allowComment, allowRating, false, 0, 0, 0, KorisnikDAO.dateToStringForWrite(d), logovani, false);
+			Video v=new Video(id, url, "photos/video.jpg", name, description, visibility, allowComment, allowRating, false, 0, 0, 0, KorisnikDAO.dateToStringForWrite(d), logovani, false);
 			VideoDAO.addVideo(v);
 			Map<String, Object> data = new HashMap<>();
 			data.put("status", "success");

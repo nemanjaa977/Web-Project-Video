@@ -27,11 +27,14 @@ public class KorisnikServlet extends HttpServlet {
 		ArrayList<Video> videos=null;
 		Korisnik vlasnik=null;
 		Korisnik loggedInUser=null;
+		boolean isSubscribe=false;
+		String korisnickoIme = null;
 		try {	
 			
-			String korisnickoIme=request.getParameter("korisnickoIme");
+			korisnickoIme=request.getParameter("korisnickoIme");
 			vlasnik=KorisnikDAO.get(korisnickoIme);
 			HttpSession session = request.getSession();
+			
 			loggedInUser= (Korisnik) session.getAttribute("logovaniKorisnik");
 			
 			if(loggedInUser != null) {
@@ -41,6 +44,12 @@ public class KorisnikServlet extends HttpServlet {
 				}else {
 					videos=VideoDAO.getAllPublicByUser(korisnickoIme);
 				}
+				if(!loggedInUser.getKorisnickoIme().equals(vlasnik.getKorisnickoIme())) {
+					int subs=KorisnikDAO.findSubscribed(vlasnik.getKorisnickoIme(), loggedInUser.getKorisnickoIme());
+					if(subs !=0) {
+						isSubscribe = true;
+					}
+				}
 			}
 			else {
 			videos=VideoDAO.getAllPublicByUser(korisnickoIme);
@@ -49,10 +58,17 @@ public class KorisnikServlet extends HttpServlet {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+		
+		ArrayList<Korisnik>subskrajberi = KorisnikDAO.subscribedOn(korisnickoIme);
+		int subscribeNumber = KorisnikDAO.getSubscribeNumber(korisnickoIme);
+		
 		Map<String, Object> data = new HashMap<>();
 		data.put("videos", videos);
 		data.put("vlasnik", vlasnik);
 		data.put("logovani", loggedInUser);
+		data.put("isSubscribe", isSubscribe);
+		data.put("subskrajberi", subskrajberi);
+		data.put("subscribeNumber", subscribeNumber);
 
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonData = mapper.writeValueAsString(data);

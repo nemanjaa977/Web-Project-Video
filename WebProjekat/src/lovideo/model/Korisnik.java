@@ -9,6 +9,7 @@ public class Korisnik {
 	public enum Uloga {KORISNIK, ADMINISTRATOR};
 	
 	private String korisnickoIme;
+	private String slicica;
 	private String lozinka;
 	private String ime;
 	private String prezime;
@@ -23,11 +24,12 @@ public class Korisnik {
 	private boolean obrisan;
 	public int brojPratioca;
 	
-	public Korisnik(String korisnickoIme, String lozinka, String ime, String prezime, String email, String opis,
+	public Korisnik(String korisnickoIme, String slicica, String lozinka, String ime, String prezime, String email, String opis,
 			String datumRegistracije, Uloga uloga, boolean blokiran, ArrayList<Korisnik> pratioci,
 			ArrayList<LikeDislike> likeVideo, ArrayList<LikeDislike> likeKomentar, boolean obrisan, int brojPratioca) {
 		super();
 		this.korisnickoIme = korisnickoIme;
+		this.slicica = slicica;
 		this.lozinka = lozinka;
 		this.ime = ime;
 		this.prezime = prezime;
@@ -41,6 +43,14 @@ public class Korisnik {
 		this.likeKomentar = likeKomentar;
 		this.obrisan = obrisan;
 		this.brojPratioca = brojPratioca;
+	}
+
+	public String getSlicica() {
+		return slicica;
+	}
+
+	public void setSlicica(String slicica) {
+		this.slicica = slicica;
 	}
 
 	public String getKorisnickoIme() {

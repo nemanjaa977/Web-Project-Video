@@ -102,4 +102,14 @@
     <servlet-name>LikeDislikeServlet</servlet-name>
     <url-pattern>/LikeDislikeServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SubscribeServlet</display-name>
+    <servlet-name>SubscribeServlet</servlet-name>
+    <servlet-class>lovideo.servlet.SubscribeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SubscribeServlet</servlet-name>
+    <url-pattern>/SubscribeServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

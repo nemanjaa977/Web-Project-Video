@@ -31,6 +31,7 @@ public class KorisnikDAO {
 
 			if (rset.next()) {
 				int index = 2;
+				String slika = rset.getString(index++);
 				String lozinka = rset.getString(index++);
 				String ime = rset.getString(index++);
 				String prezime = rset.getString(index++);
@@ -41,8 +42,8 @@ public class KorisnikDAO {
 				Uloga uloga = Uloga.valueOf(rset.getString(index++));
 				boolean blokiran = rset.getBoolean(index++);
 				boolean obrisan = rset.getBoolean(index++);
-				
-				return new Korisnik(korisnickoIme, lozinka, ime, prezime, email, opis, datumRegistracije, uloga, blokiran, null, null, null, obrisan, 0);
+				int brojPratioca = rset.getInt(index++);
+				return new Korisnik(korisnickoIme, slika, lozinka, ime, prezime, email, opis, datumRegistracije, uloga, blokiran, null, null, null, obrisan, brojPratioca);
 				
 			}
 		} catch (SQLException ex) {
@@ -72,6 +73,7 @@ public class KorisnikDAO {
 			 while(rset.next()) {
 				int index = 1;
 				String korisnickoIme = rset.getString(index++);
+				String slika = rset.getString(index++);
 				String lozinka = rset.getString(index++);
 				String ime = rset.getString(index++);
 				String prezime = rset.getString(index++);
@@ -82,8 +84,8 @@ public class KorisnikDAO {
 				Uloga uloga = Uloga.valueOf(rset.getString(index++));
 				boolean blokiran = rset.getBoolean(index++);
 				boolean obrisan = rset.getBoolean(index++);
-				
-				korisnici.add(new Korisnik(korisnickoIme, lozinka, ime, prezime, email, opis, datumRegistracije, uloga, blokiran, null, null, null, obrisan, 0));
+				int brojPratioca = rset.getInt(index++);
+				korisnici.add(new Korisnik(korisnickoIme, slika, lozinka, ime, prezime, email, opis, datumRegistracije, uloga, blokiran, null, null, null, obrisan, brojPratioca));
 				
 			}
 			 return korisnici;
@@ -103,12 +105,13 @@ public class KorisnikDAO {
 		
 		PreparedStatement pstmt = null;
 		try {
-			String query = "INSERT INTO users (korisnickoIme, lozinka, ime, prezime, email, opis, datumRegistracije, uloga, blokiran, obrisan)"
-					+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String query = "INSERT INTO users (korisnickoIme, slicica, lozinka, ime, prezime, email, opis, datumRegistracije, uloga, blokiran, obrisan, brojPratioca)"
+					+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 			pstmt = conn.prepareStatement(query);
 			int index = 1;
 			pstmt.setString(index++, korisnik.getKorisnickoIme());
+			pstmt.setString(index++, korisnik.getSlicica());
 			pstmt.setString(index++, korisnik.getLozinka());
 			pstmt.setString(index++, korisnik.getIme());
 			pstmt.setString(index++, korisnik.getPrezime());
@@ -120,6 +123,7 @@ public class KorisnikDAO {
 			pstmt.setString(index++, korisnik.getUloga().toString());
 			pstmt.setBoolean(index++, korisnik.isBlokiran());
 			pstmt.setBoolean(index++, korisnik.isObrisan());
+			pstmt.setInt(index++, korisnik.getBrojPratioca());
 			return pstmt.executeUpdate() == 1;
 		} catch (SQLException ex) {
 			System.out.println("Greska u SQL upitu!");
@@ -136,7 +140,7 @@ public class KorisnikDAO {
 		
 		PreparedStatement pstmt = null;
 		try {
-			String query = "UPDATE users SET lozinka = ?, ime = ?, prezime = ?, opis = ?, uloga = ?, blokiran = ?, obrisan = ? WHERE korisnickoIme = ?";
+			String query = "UPDATE users SET lozinka = ?, ime = ?, prezime = ?, opis = ?, uloga = ?, blokiran = ?, obrisan = ?, brojPratioca = ? WHERE korisnickoIme = ?";
 
 			pstmt = conn.prepareStatement(query);
 			int index = 1;
@@ -147,6 +151,7 @@ public class KorisnikDAO {
 			pstmt.setString(index++, korisnik.getUloga().toString());
 			pstmt.setBoolean(index++, korisnik.isBlokiran());
 			pstmt.setBoolean(index++, korisnik.isObrisan());
+			pstmt.setInt(index++, korisnik.getBrojPratioca());
 			pstmt.setString(index++, korisnik.getKorisnickoIme());
 			
 			return pstmt.executeUpdate() == 1;
@@ -203,5 +208,134 @@ public class KorisnikDAO {
 
 		return null;
 
+	}
+	
+	public static boolean addSubs(String masterUser, String subs) {
+		Connection conn = ConnectionManager.getConnection();
+
+		PreparedStatement pstmt = null;
+		try {
+			String query = "INSERT INTO subscribe(korisnik,subskrajber) VALUES(?, ?)";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, masterUser);
+			pstmt.setString(2, subs);
+			return pstmt.executeUpdate() == 1;
+		} catch (Exception ex) {
+			System.out.println("Greska u SQL upitu!");
+			ex.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+			} catch (SQLException ex1) {
+				ex1.printStackTrace();
+			}
+		}
+		return false;
+	}
+
+	public static boolean deleteSubs(String masterUser, String subs) {
+		Connection conn = ConnectionManager.getConnection();
+
+		PreparedStatement pstmt = null;
+		try {
+			String query = "DELETE FROM subscribe WHERE korisnik = ? AND subskrajber = ?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, masterUser);
+			pstmt.setString(2, subs);
+			return pstmt.executeUpdate() == 1;
+		} catch (Exception ex) {
+			System.out.println("Greska u SQL upitu!");
+			ex.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+			} catch (SQLException ex1) {
+				ex1.printStackTrace();
+			}
+		}
+		return false;
+	}
+	
+	public static int findSubscribed(String userName, String subscriber) {
+		Connection conn = ConnectionManager.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			String query = "SELECT COUNT(*) FROM subscribe WHERE  korisnik = ? AND subskrajber = ?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userName);
+			pstmt.setString(2, subscriber);
+			rset = pstmt.executeQuery();
+
+			if (rset.next()) {
+				int index = 1;
+				int subs = rset.getInt(index);
+				return subs;
+
+			}
+
+		} catch (Exception ex) {
+			System.out.println("Greska u SQL upitu!");
+			ex.printStackTrace();
+		} finally {
+			try {pstmt.close();} catch (SQLException ex1) {ex1.printStackTrace();}
+			try {rset.close();} catch (SQLException ex1) {ex1.printStackTrace();}
+		}
+		return 0;
+	}
+	
+	public static int getSubscribeNumber(String userName) {
+		Connection conn = ConnectionManager.getConnection();
+
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			String query = "SELECT Count(*) FROM subscribe WHERE korisnik = ?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userName);
+			rset = pstmt.executeQuery();
+
+			if (rset.next()) {
+				int index = 1;
+				int subs = rset.getInt(index);
+				return subs;
+			}
+		} catch (Exception ex) {
+			System.out.println("Greska u SQL upitu!");
+			ex.printStackTrace();
+		} finally {
+			try {pstmt.close();} catch (SQLException ex1) {ex1.printStackTrace();}
+			try {rset.close();} catch (SQLException ex1) {ex1.printStackTrace();}
+		}
+		return 0;
+	}
+	
+	public static ArrayList<Korisnik> subscribedOn(String userName) {
+		Connection conn = ConnectionManager.getConnection();
+		ArrayList<Korisnik> subscribed = new ArrayList<Korisnik>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			String query = "SELECT korisnik FROM subscribe WHERE subskrajber = ?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userName);
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+				int index = 1;
+				String glavni = rset.getString(index);
+
+				Korisnik k = get(glavni);
+				subscribed.add(k);
+			}
+
+		} catch (Exception ex) {
+			System.out.println("Greska u SQL upitu!");
+			ex.printStackTrace();
+		} finally {
+			try {pstmt.close();} catch (SQLException ex1) {ex1.printStackTrace();}
+			try {rset.close();} catch (SQLException ex1) {ex1.printStackTrace();}
+		}
+		return subscribed;
 	}
 }

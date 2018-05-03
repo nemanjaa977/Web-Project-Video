@@ -9,7 +9,7 @@ body {
 	margin: 0;
 	padding: 0;
 	background-size: cover;
-  background: #e6ffe6;
+    background: white;
 }
 
 .navBar {
@@ -26,6 +26,7 @@ body {
   text-decoration: none;
   font-size: 20px;
   opacity: 0.8;
+  border-right: 1px solid white;
 }
 
 .navBar a:hover {
@@ -60,16 +61,30 @@ body {
 .dataVideo h2{
   word-wrap: break-word;
   word-break: break-all;
+  color: #333;
 }
 
 .dataVideo p{
   display: inline-block;
 }
 
+.dataVideo #numberVievs{
+	color: #333;
+	font-size: 18px;
+}
+
 .likeVideo{
   float: right;
   color: gray;
   cursor: pointer;
+}
+
+.likeVideo p{
+	font-size: 22px;
+}
+
+.likeVideo i{
+	font-size: 22px;
 }
 
 .likeVideo p:hover{
@@ -106,7 +121,8 @@ body {
 .photosSub #date {
   display: block;
   margin-top: 10px;
-  font-size: 16px;
+  font-size: 18px;
+  color: #333;
 }
 
 #description {
@@ -115,6 +131,8 @@ body {
   margin-top: 20px;
   word-wrap: break-word;
   word-break: break-all;
+  color: #333;
+  font-size: 18px;
 }
 
 #subscribe {
@@ -127,6 +145,7 @@ body {
   border-radius: 5%;
   cursor: pointer;
   margin: 1%;
+  margin-right: 0%;
 }
 
 .comentar{

@@ -8,7 +8,7 @@
 body {
 	margin: 0;
 	padding: 0;
-	background: #e6ffe6;
+	background: white;
 	background-size: cover;
 }
 
@@ -26,6 +26,7 @@ body {
   text-decoration: none;
   font-size: 20px;
   opacity: 0.8;
+  border-right: 1px solid white;
 }
 
 .navBar a:hover {
