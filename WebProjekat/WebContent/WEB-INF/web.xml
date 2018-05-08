@@ -112,4 +112,24 @@
     <servlet-name>SubscribeServlet</servlet-name>
     <url-pattern>/SubscribeServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>KomentarDAO</display-name>
+    <servlet-name>KomentarDAO</servlet-name>
+    <servlet-class>lovideo.dao.KomentarDAO</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>KomentarDAO</servlet-name>
+    <url-pattern>/KomentarDAO</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>KomentarServlet</display-name>
+    <servlet-name>KomentarServlet</servlet-name>
+    <servlet-class>lovideo.servlet.KomentarServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>KomentarServlet</servlet-name>
+    <url-pattern>/KomentarServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

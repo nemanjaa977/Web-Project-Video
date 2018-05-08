@@ -80,3 +80,20 @@ CREATE TABLE subscribe(
 	FOREIGN KEY (korisnik) REFERENCES users(korisnickoIme) ON DELETE RESTRICT,
 	FOREIGN KEY (subskrajber) REFERENCES users(korisnickoIme) ON DELETE RESTRICT
 );
+
+CREATE TABLE comment(
+	id BIGINT AUTO_INCREMENT,
+	sadrzaj VARCHAR(120),
+	datumKreiranja DATE NOT NULL,
+	vlasnik VARCHAR(20),
+	video BIGINT NOT NULL,
+	brojLike BIGINT NOT NULL,
+	brojDislike BIGINT NOT NULL,
+	obrisan BOOLEAN NOT NULL DEFAULT FALSE,
+	PRIMARY KEY (id),
+	FOREIGN KEY (vlasnik) REFERENCES users(korisnickoIme) ON DELETE RESTRICT,
+	FOREIGN KEY (video) REFERENCES videos(id) ON DELETE RESTRICT
+);
+
+INSERT INTO comment(sadrzaj,datumKreiranja,vlasnik,video,brojLike,brojDislike)
+VALUES('Best movieee','2018-1-1','mare',1,0,0);

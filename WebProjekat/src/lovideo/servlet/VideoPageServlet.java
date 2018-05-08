@@ -1,6 +1,7 @@
 package lovideo.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,8 +14,10 @@ import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import lovideo.dao.KomentarDao;
 import lovideo.dao.KorisnikDAO;
 import lovideo.dao.VideoDAO;
+import lovideo.model.Komentar;
 import lovideo.model.Korisnik;
 import lovideo.model.Video;
 import lovideo.model.Video.Vidljivost;
@@ -43,10 +46,13 @@ public class VideoPageServlet extends HttpServlet {
 			
 			video.setBrojPregleda(video.getBrojPregleda()+1);
 			VideoDAO.updateVideo(video);
+			ArrayList<Komentar> komentarii = KomentarDao.getComments(video.getId());
+			
 			Map<String, Object> data = new HashMap<>();
 			data.put("videos", video);
 			data.put("logovani", logovani);
 			data.put("isSubscribe", isSubscribe);
+			data.put("komentarii", komentarii);
 			
 			ObjectMapper mapper = new ObjectMapper();
 			String jsonData = mapper.writeValueAsString(data);

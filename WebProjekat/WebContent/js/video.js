@@ -13,7 +13,8 @@ $(document).ready(function(){
 	var nav = $(".navBar");
 	var slika = $("#slika");
 	var subscribe = $('#subscribe');
-
+	var divSaKomentarima = $('#divKomentari');
+	var addKomentar=$('#comButton');
 	
 	$.get('VideoPageServlet',{'id':id},function(data){
 		video.attr("src",data.videos.videoURL+"?rel=0&autoplay=1");
@@ -23,7 +24,8 @@ $(document).ready(function(){
 		dislike.text(data.videos.brojDislike);
 		
 		slika.attr("src",data.videos.vlasnik.slicica);
-		vlasnikIme.text(data.videos.vlasnik.korisnickoIme);   //staviti da ide na stranicu korisnika a ne da ponoovo ucita video
+		vlasnikIme.text(data.videos.vlasnik.korisnickoIme);
+		vlasnikIme.attr("href", "user.html?korisnickoIme="+data.videos.vlasnik.korisnickoIme)
 		datum.text("Published: " + data.videos.datumKreiranja);
 		opiss.text(data.videos.opis);
 		
@@ -34,6 +36,27 @@ $(document).ready(function(){
 			subscribe.text("Unsubscribe");
 		}
 		
+		for(i in data.komentarii){
+			if(data.komentarii[i].vlasnik != null){
+				divSaKomentarima.append("<div class='allComment'>" +
+											"<div class='oneC'>" +
+												"<p><img id='slika' src="+data.komentarii[i].vlasnik.slicica+"></p>" +
+												"<a id='korImeKom' href='user.html?korisnickoIme="+data.komentarii[i].vlasnik.korisnickoIme+"'>"+data.komentarii[i].vlasnik.korisnickoIme+"</a>" +
+											"</div>" +
+											"<div class='twoCom'>" +
+												"<p>Creation date: "+data.komentarii[i].datumKreiranja+"</p>" +
+												"<p id='problem'>"+data.komentarii[i].sadrzaj+"</p>" +
+											"<div class='likeX'>" +
+												"<i class='fa fa-thumbs-o-up'></i>" +
+												"<p id='likeNumber'>"+data.komentarii[i].brojLike+"</p>" +
+												"<i class='fa fa-thumbs-o-down'></i>" +
+												"<p id='dislikeNumber'>"+data.komentarii[i].brojDislike+"</p>" +
+											"</div>" +
+											"</div>" +
+										"</div>");
+			}
+		}
+		
 		if(data.logovani != null){
 			nav.append("<a class='active' href='pocetna.html'><i class='fa fa-home'></i> Home</a>" +
 					"<a href='user.html?korisnickoIme="+data.logovani.korisnickoIme+"'><i class='fa fa-user-o'></i> Profile</a>" +  
@@ -42,6 +65,36 @@ $(document).ready(function(){
 			if(data.logovani.blokiran == true){
 				$('#editt').hide();
 			}
+			
+			addKomentar.on('click',function(event){
+				
+				var komentar=$('#commentContext').val();
+				
+				$.post('KomentarServlet',{'id':data.videos.id,'komentar':komentar},function(data){
+					divSaKomentarima.append("<div class='allComment'>" +
+							"<div class='oneC'>" +
+								"<p><img id='slika' src="+data.komentarii.vlasnik.slicica+"></p>" +
+								"<a id='korImeKom' href='user.html?korisnickoIme="+data.komentarii.vlasnik.korisnickoIme+"'>"+data.komentarii.vlasnik.korisnickoIme+"</a>" +
+							"</div>" +
+							"<div class='twoCom'>" +
+								"<p>Creation date: "+data.komentarii.datumKreiranja+"</p>" +
+								"<p id='problem'>"+data.komentarii.sadrzaj+"</p>" +
+							"<div class='likeX'>" +
+								"<i class='fa fa-thumbs-o-up'></i>" +
+								"<p id='likeNumber'>"+data.komentarii.brojLike+"</p>" +
+								"<i class='fa fa-thumbs-o-down'></i>" +
+								"<p id='dislikeNumber'>"+data.komentarii.brojDislike+"</p>" +
+							"</div>" +
+							"</div>" +
+						"</div>");
+					
+					komentar.val("");
+							
+			});		
+				event.preventDefault();
+				return false;
+				
+			});
 			
 			lajkic.on('click',function(event){		
 				$.get('LikeDislikeServlet',{'id':data.videos.id},function(data){
