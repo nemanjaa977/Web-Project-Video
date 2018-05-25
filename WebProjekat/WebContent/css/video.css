@@ -161,6 +161,8 @@ body {
   border: none;
   background: gray;
   color: white;
+  cursor: pointer;
+  margin-left: 14%;
 }
 
 .comentar img{
@@ -212,12 +214,89 @@ body {
 
 .allComment .twoCom{
     float: left;
-    width: 400px;
+    width: 625px;
     height: auto;
     margin: 10px; 
     -ms-flex: 15%; 
     flex: 15%;
     margin-top: 4px;
+    display: inline-block;
+}
+
+#overlay{
+	 width: 17%;
+	 height: 30%;
+	 position: fixed;
+	 top: 60%;
+	 right: 0;
+	 background: white;
+	 border: 1px solid gray;
+	 display: none;
+}
+
+#overlay #editDescription{
+	color: #333;
+	display: inline-block;
+	height: auto;
+	margin: 0;
+	font-size: 18px;
+	word-wrap: break-word;
+	word-break: break-all;
+	margin-left: 1px;
+}
+
+#overlay #cancelEditDescription{
+	font-size: 20px;
+	margin-top: 5px;
+	margin-left: 1px;
+	color: white;
+	border: none;
+	background: gray;
+	cursor: pointer;
+}
+
+#overlay #titleEdit{
+	color: #333;
+	font-size: 20px;
+	margin-left: 3px;
+	
+}
+
+#overlay #okEditButton{
+	border: none;
+	background: gray;
+	color: white;
+	cursor: pointer;
+	padding: 1px 1px 1px;
+	margin-left: 2%;
+	font-size: 20px;
+	width: 40px;
+}
+
+#deleteCom{
+	display: inline-block;
+	height: auto;
+	text-align: center;
+}
+
+#deleteCom #brisanjeComentar{
+	background: gray;
+	color: white;
+	font-size: 17px;
+	cursor: pointer;
+	margin: 7%;
+	border: none;
+	width: 100px;
+}
+
+#deleteCom #izmenaComentar{
+	margin-top: 50%;
+	background: gray;
+	color: white;
+	font-size: 17px;
+	cursor: pointer;
+	border: none;
+	width: 100px;
 }
 
 .twoCom #problem{
@@ -230,13 +309,52 @@ body {
 
 .allComment .likeX{
   float: left;
-  cursor: pointer;
   color: gray;
   font-size: 20px;
 }
 
+
 .allComment .likeX p{
   display: inline-block;
+}
+
+.likeX button{
+	border: none;
+	background: none;
+	font-size: 15px;
+	cursor: pointer;
+	color: gray;
+}
+
+#sortDiv{
+	display: inline-block;
+	  margin-left: 17%;
+}
+
+#sortDiv #sort{
+	display: inline-block;
+	font-size: 23px;
+	color: #333;
+}
+
+#sortDiv .nameSort{
+	display: inline-block;
+	font-size: 18px;
+	color: #333;
+}
+
+#sortDiv .ascDesc{
+	font-size: 18px;
+	display: inline-block;
+	color: #333;
+}
+
+#sortDiv #okSort{
+	font-size: 18px;
+	background: white;
+	cursor: pointer;
+	color: #333;
+	
 }
 
 .allComment .likeX i{

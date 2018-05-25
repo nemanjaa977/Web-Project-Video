@@ -10,6 +10,7 @@ $(document).ready(function(e) {
 	var subDiv = $("#subProfile");
 	var izaberiSub = $('#naslovSubb');
 	var closeSubb = $('#closeSub');
+	var returnHome = $('#returnHome');
 	
 	$.get('KorisnikServlet',{'korisnickoIme':korisnickoIme},function(data){
 		for(i in data.videos){
@@ -18,9 +19,9 @@ $(document).ready(function(e) {
 		glavniDiv.append("<div class='maliDiv'> " + 
       					"<div>" + 
       					"<p><img src="+data.videos[i].slicica+"></p>" +
-      					"<a href='video.html?videoName="+data.videos[i].id+"' style='border:none; background:none; cursor:pointer'><p id='videoName'>"+data.videos[i].nazivVideo+"</p></a>" +
+      					"<a href='video.html?id="+data.videos[i].id+"' style='border:none; background:none; cursor:pointer'><p id='videoName'>"+data.videos[i].nazivVideo+"</p></a>" +
       					"<p id='brPregleda'>"+data.videos[i].brojPregleda+" views</p>" +
-      					"<p>Date: "+data.videos[i].datumKreiranja+"</p>" +
+      					"<p id='dateOfCreateUser'>Date: "+data.videos[i].datumKreiranja+"</p>" +
       					"</div>" +
       					"<div class='brisanje'>" +
       					"<button class='butDelete' name="+data.videos[i].id+"><i class='fa fa-trash'></i> Delete</button>"+
@@ -127,6 +128,10 @@ $(document).ready(function(e) {
 				$('#kaoOpis').hide();
 				$('.glavniDiv').hide();
 				$("#overlay").fadeIn();
+				$('#subProfile').hide();
+				$('#subMargin').hide();
+				$('#sortDiv').hide();
+				$('.block').hide();
 			}
 			
 			if( data.vlasnik.blokiran == true){
@@ -136,6 +141,7 @@ $(document).ready(function(e) {
 						$('#kaoOpis').show();
 						$('.glavniDiv').show();
 						$("#overlay").hide();
+						returnHome.hide();
 					}
 				}
 			}
@@ -149,7 +155,14 @@ $(document).ready(function(e) {
 				$('#kaoOpis').hide();
 				$('.glavniDiv').hide();
 				$("#overlay").fadeIn();
+				returnHome.hide();
 			}
+			
+			$(document).on('click',"#btnsub", function(event){
+				alert("First, you must sign up!")
+			});
+			
+			$('#subMargin').hide();
 		}
 		
 	});
@@ -163,10 +176,14 @@ $(document).on('click',"#okSort", function(event){
 		if(ascDesc =="Ascending"){
 			if(sortBy == "brojPregleda"){
 				sortBrojPregledaA();
+			}else if(sortBy == "date"){
+				sortDatumKreiranjaA();
 			}
 		}else{
 			if(sortBy == "brojPregleda"){
 				sortBrojPregledaD();
+			}else if(sortBy == "date"){
+				sortDatumKreiranjaD();
 			}	
 		}
 		event.preventDefault;
@@ -206,6 +223,26 @@ function sortBrojPregledaA(){
 function sortBrojPregledaD(){
 	 $('.maliDiv').sort(function(a, b) {
 		 if (parseInt($(a).find('#brPregleda').text()) > parseInt($(b).find('#brPregleda').text())) {
+		    return -1;
+		  } else {
+		    return 1;
+		  }
+	}).appendTo('.glavniDiv');
+}
+
+function sortDatumKreiranjaA(){
+	 $('.maliDiv').sort(function(a, b) {
+		  if (Date($(a).find('#dateOfCreateUser').text()) < Date($(b).find('#dateOfCreateUser').text())) {
+		    return -1;
+		  } else {
+		    return 1;
+		  }
+	}).appendTo('.glavniDiv');
+}
+
+function sortDatumKreiranjaD(){
+	 $('.maliDiv').sort(function(a, b) {
+		  if (Date($(a).find('#dateOfCreateUser').text()) > Date($(b).find('#dateOfCreateUser').text())) {
 		    return -1;
 		  } else {
 		    return 1;

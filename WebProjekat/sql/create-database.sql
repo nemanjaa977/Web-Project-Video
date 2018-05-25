@@ -97,3 +97,10 @@ CREATE TABLE comment(
 
 INSERT INTO comment(sadrzaj,datumKreiranja,vlasnik,video,brojLike,brojDislike)
 VALUES('Best movieee','2018-1-1','mare',1,0,0);
+
+CREATE TABLE likeDislikeComment(
+	likeId BIGINT,
+	commentId BIGINT,
+	FOREIGN KEY (likeId) REFERENCES likeDislike (id) ON DELETE RESTRICT,
+	FOREIGN KEY (commentId) REFERENCES comment (id) ON DELETE RESTRICT
+);

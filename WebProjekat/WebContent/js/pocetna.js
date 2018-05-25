@@ -8,7 +8,7 @@ $(document).ready(function() {
 			row.append("<div class='column' id='column'> " + 
   					"<p><img src="+data.videos[i].slicica+"></p>" + 
   					"<a href='user.html?username="+data.videos[i].vlasnik.korisnickoIme+"'><p id='usernamee'>"+data.videos[i].vlasnik.korisnickoIme+"</p></a>" +
-  					"<a href='video.html?videoName="+data.videos[i].id+"' style='border:none; color:#00004d; background:none; cursor:pointer'><p id='videoName'>"+data.videos[i].nazivVideo+"</p></a>" +
+  					"<a href='video.html?id="+data.videos[i].id+"' style='border:none; color:#00004d; background:none; cursor:pointer'><p id='videoName'>"+data.videos[i].nazivVideo+"</p></a>" +
   					"<p id='views'>"+data.videos[i].brojPregleda+"  views</p>" +
   					"<p id='dateCreation'>Date: "+data.videos[i].datumKreiranja+"</p>" +
   				"</div>");
@@ -39,6 +39,8 @@ $(document).on('click',"#okSort", function(event){
 				sortOwnerA();
 			}else if(sortBy == "viewsVi"){
 				sortBrojPregledaA();
+			}else if(sortBy == "dateVi"){
+				sortDatumKreiranjaA();
 			}
 		}else{
 			if(sortBy == "nameVi"){
@@ -47,7 +49,9 @@ $(document).on('click',"#okSort", function(event){
 				sortOwnerD();
 			}else if(sortBy == "viewsVi"){
 				sortBrojPregledaD();
-			}		
+			}else if(sortBy == "dateVi"){
+				sortDatumKreiranjaD();
+			}
 		}
 		event.preventDefault;
 		return false;
@@ -120,6 +124,26 @@ function sortBrojPregledaA(){
 function sortBrojPregledaD(){
 	 $('.column').sort(function(a, b) {
 		  if (parseInt($(a).find('#views').text()) > parseInt($(b).find('#views').text())) {
+		    return -1;
+		  } else {
+		    return 1;
+		  }
+	}).appendTo('.row');
+}
+
+function sortDatumKreiranjaA(){
+	 $('.column').sort(function(a, b) {
+		  if (Date($(a).find('#dateCreation').text()) < Date($(b).find('#dateCreation').text())) {
+		    return -1;
+		  } else {
+		    return 1;
+		  }
+	}).appendTo('.row');
+}
+
+function sortDatumKreiranjaD(){
+	 $('.column').sort(function(a, b) {
+		  if (Date($(a).find('#dateCreation').text()) > Date($(b).find('#dateCreation').text())) {
 		    return -1;
 		  } else {
 		    return 1;

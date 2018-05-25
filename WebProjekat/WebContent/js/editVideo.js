@@ -50,52 +50,54 @@ $(document).ready(function(){
 		}
 		
 		descript.val(data.videos.opis);
-		
-		$('#editSubmitVideo').on('click',function(event){
-
-			var editedDescription = descript.val();
-			var vid = "PUBLIC";
-			if(checkPrivate.is(':checked')){
-				vid = "PRIVATE";
-			}else if(checkUnlisted.is(':checked')){
-				vid = "UNLISTED"
-			}
-			
-			var comments = true;
-			if(noComm.is(':checked')){
-				comments = false;
-			}
-			
-			var rating = true;
-			if(noRating.is(':checked')){
-				rating = false;
-			}
-			
-			var block = true;
-			if(noBlock.is(':checked')){
-				block = false;
-			}
-
-			var params={
-					'status':'izmena',
-					'editedDescription':editedDescription,
-					'id': id,
-					'vid': vid,
-					'comments': comments,
-					'rating': rating,
-					'block': block
-			};
-			
-			$.post('VideoPageServlet',params,function(data){
-				if(data.status=="success"){
-					var location="video.html?id="+id;
-					window.location.replace(location);
-				}
-			});
-			event.preventDefault();
-			return false;
-		});
-		
 	});
 
+		
+	$('#editSubmitVideo').on('click',function(event){
+
+		var editedDescription = descript.val();
+		var vid = "PUBLIC";
+		if(checkPrivate.is(':checked')){
+			vid = "PRIVATE";
+		}else if(checkUnlisted.is(':checked')){
+			vid = "UNLISTED"
+		}
+		
+		var comments = true;
+		if(noComm.is(':checked')){
+			comments = false;
+		}
+		
+		var rating = true;
+		if(noRating.is(':checked')){
+			rating = false;
+		}
+		
+		var block = true;
+		if(noBlock.is(':checked')){
+			block = false;
+		}
+
+		var params={
+				'status':'izmena',
+				'editedDescription':editedDescription,
+				'id': id,
+				'vid': vid,
+				'comments': comments,
+				'rating': rating,
+				'block': block
+		};
+		
+		$.post('VideoPageServlet',params,function(data){
+			if(data.status=="success"){
+				var location="video.html?id="+id;
+				window.location.replace(location);
+			}
+		});
+		
+		event.preventDefault();
+		return false;
+	});
+	
+	
 });

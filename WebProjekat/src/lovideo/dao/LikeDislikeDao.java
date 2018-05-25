@@ -186,4 +186,109 @@ public class LikeDislikeDao {
 		}
 		return false;
 	}
+	
+	public static LikeDislike getCommentLikeByOwner(int commentId,String vlasnik) {
+		Connection conn = ConnectionManager.getConnection();
+
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			String query = "SELECT * FROM likeDislikeComment JOIN likeDislike on likeDislikeComment.likeId = likeDislike.id WHERE likeDislikeComment.commentId = ? AND likeDislike.vlasnik = ?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, commentId);
+			pstmt.setString(2, vlasnik);
+			rset = pstmt.executeQuery();
+
+			if (rset.next()) {
+				int index = 2;
+				int videosId = rset.getInt(index++);
+				int likeId = rset.getInt(index++);
+				boolean isLike = rset.getBoolean(index++);
+				Date d = rset.getDate(index++);
+				String owner = rset.getString(index++);
+				String date = KorisnikDAO.dateToString(d);
+				return new LikeDislike(likeId, isLike, date, VideoDAO.get(videosId), null, KorisnikDAO.get(owner));
+			}
+
+		} catch (Exception ex) {
+			System.out.println("Greska u SQL upitu!");
+			ex.printStackTrace();
+		} finally {
+			try {pstmt.close();} catch (SQLException ex1) {ex1.printStackTrace();}
+			try {rset.close();} catch (SQLException ex1) {ex1.printStackTrace();}
+		}
+		return null;
+	}
+	
+	public static int getCommentLikeNumber(int commentId) {
+		Connection conn = ConnectionManager.getConnection();
+
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			String query = "SELECT COUNT(*) FROM likeDislikeComment JOIN likeDislike on likeDislikeComment.likeId = likeDislike.id WHERE lajkovan = ? AND likeDislikeComment.commentId = ?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setBoolean(1, true);
+			pstmt.setInt(2, commentId);
+			rset = pstmt.executeQuery();
+
+			if (rset.next()) {
+					int likeNumber =rset.getInt(1);					
+					return likeNumber;
+			}
+
+		} catch (Exception ex) {
+			System.out.println("Greska u SQL upitu!");
+			ex.printStackTrace();
+		} finally {
+			try {pstmt.close();} catch (SQLException ex1) {ex1.printStackTrace();}
+			try {rset.close();} catch (SQLException ex1) {ex1.printStackTrace();}
+		}
+		return 0;
+	}
+	
+	public static boolean addCommentLikeDislike(int likeId, int commentId) {
+		Connection conn = ConnectionManager.getConnection();
+		PreparedStatement pstmt = null;
+		try {
+			String query="INSERT INTO likeDislikeComment(likeId,commentId) VALUES(?, ?)";
+			pstmt=conn.prepareStatement(query);
+			pstmt.setInt(1, likeId);
+			pstmt.setInt(2, commentId);
+			 return pstmt.executeUpdate() == 1;
+		} catch (Exception ex) {
+			System.out.println("Greska u SQL upitu!");
+			ex.printStackTrace();
+		} finally {
+			try {pstmt.close();} catch (SQLException ex1) {ex1.printStackTrace();}
+		}
+		return false;
+	}
+	
+	public static int getCommentDislikeNumber(int commentId) {
+		Connection conn = ConnectionManager.getConnection();
+
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			String query = "SELECT COUNT(*) FROM likeDislikeComment JOIN likeDislike on likeDislikeComment.likeId = likeDislike.id WHERE lajkovan = ? AND likeDislikeComment.commentId = ?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setBoolean(1, false);
+			pstmt.setInt(2, commentId);
+			rset = pstmt.executeQuery();
+
+			if (rset.next()) {
+					int likeNumber =rset.getInt(1);			
+					return likeNumber;
+			}
+
+		} catch (Exception ex) {
+			System.out.println("Greska u SQL upitu!");
+			ex.printStackTrace();
+		} finally {
+			try {pstmt.close();} catch (SQLException ex1) {ex1.printStackTrace();}
+			try {rset.close();} catch (SQLException ex1) {ex1.printStackTrace();}
+		}
+		return 0;
+	}
 }

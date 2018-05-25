@@ -114,12 +114,12 @@ public class VideoPageServlet extends HttpServlet {
 			System.out.println(jsonData);
 			
 		}else if(status.equals("izmena")) {
+			int id=Integer.parseInt(request.getParameter("id"));
 			String opis = request.getParameter("editedDescription");
 			boolean komentari = Boolean.parseBoolean(request.getParameter("comments"));
 			String vidljivostString = request.getParameter("vid");
 			boolean rejting = Boolean.parseBoolean(request.getParameter("rating"));
 			boolean blokiran = Boolean.parseBoolean(request.getParameter("block"));
-			int id=Integer.parseInt(request.getParameter("id"));
 			
 			Vidljivost vidljivost = Vidljivost.valueOf(vidljivostString);
 				

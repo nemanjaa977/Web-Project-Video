@@ -77,7 +77,7 @@ $(document).ready(function(e) {
 				sortSurnameA();
 			}else if(sortBy == "email"){
 				sortEmailA();
-			}else{
+			}else if(sortBy == "role"){
 				sortRoleA();
 			}
 		}else{
@@ -89,7 +89,7 @@ $(document).ready(function(e) {
 				sortSurnameD();
 			}else if(sortBy == "email"){
 				sortEmailD();
-			}else{
+			}else if(sortBy == "role"){
 				sortRoleD();
 			}
 			

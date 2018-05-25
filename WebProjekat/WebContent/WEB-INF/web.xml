@@ -132,4 +132,14 @@
     <servlet-name>KomentarServlet</servlet-name>
     <url-pattern>/KomentarServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>KomentarLikeDislikeServlet</display-name>
+    <servlet-name>KomentarLikeDislikeServlet</servlet-name>
+    <servlet-class>lovideo.servlet.KomentarLikeDislikeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>KomentarLikeDislikeServlet</servlet-name>
+    <url-pattern>/KomentarLikeDislikeServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
