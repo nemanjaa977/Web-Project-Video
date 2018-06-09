@@ -210,7 +210,7 @@ $(document).ready(function(){
 				
 			}
 			
-			if(data.videos.vlasnik.blokiran == true){
+			if(data.videos.vlasnik.blokiran == true && data.logovani.uloga != "ADMINISTRATOR"){
 				$('#overlayBlocked').fadeIn();
 				$('.dataVide').hide();
 				$('.photoSub').hide();
