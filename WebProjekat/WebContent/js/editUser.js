@@ -9,7 +9,7 @@ $(document).ready(function(){
 	var admin = $('#adminId');
 	var labPass = $('#labPass');
 	
-	nav.append('<a href="pocetna.html"><i class="fa fa-home"></i> Home</a> <a href="user.html?korisnickoIme='+korisnickoIme+'"><i class="fa fa-user-o"></i> Profile</a>');
+	nav.append('<a href="pocetna.html"><i class="fa fa-home"></i> Home</a> <a href="LogOutServlet"><i class="fa fa-angle-double-down"></i> Log Out </a> <a href="user.html?korisnickoIme='+korisnickoIme+'"><i class="fa fa-user-o"></i> Profile</a>');
 	
 	$.get('KorisnikServlet',{'korisnickoIme':korisnickoIme},function(data){
 		

@@ -48,7 +48,7 @@ public class RegisterServlet extends HttpServlet {
 			Date d=new Date();
 			String date = KorisnikDAO.dateToStringForWrite(d);
 			
-			Korisnik noviKorisnik = new Korisnik(korisnickoIme, "photos/Zac.jpg", lozinka, ime, prezime, email, opis, date, Uloga.KORISNIK, false, null, null, null, false, 0);
+			Korisnik noviKorisnik = new Korisnik(korisnickoIme, "photos/korisnik.png", lozinka, ime, prezime, email, opis, date, Uloga.KORISNIK, false, null, null, null, false, 0);
 			KorisnikDAO.add(noviKorisnik);
 		} catch (Exception ex) {
 			status = "failure";

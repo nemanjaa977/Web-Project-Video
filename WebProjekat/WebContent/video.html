@@ -1,58 +1,70 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>Video</title>
-	<link rel="icon" type="image/png" href="photos/play.png">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-	<link rel="stylesheet" type="text/css" href="css/video.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<script src="jquery-3.2.1.js"></script>
-	<script type="text/javascript" src="js/video.js"></script>
+<meta charset="UTF-8">
+<title>Video</title>
+<link rel="icon" type="image/png" href="photos/play.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="css/video.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="jquery-3.2.1.js"></script>
+<script type="text/javascript" src="js/video.js"></script>
 </head>
 <body>
-	<div class="navBar">
-	</div>
+	<div class="navBar"></div>
 	<div id="videoPlayer">
-		<iframe id="myVideo" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-  	</div>
+		<iframe id="myVideo" src="" frameborder="0"
+			allow="autoplay; encrypted-media" allowfullscreen></iframe>
+	</div>
 	<div class="dataVideo">
- 		<h2 id="videoName"></h2>
- 		<p id="numberVievs"></p>
-	 	<div class="likeVideo">
-	 		<i class="fa fa-thumbs-o-up" id="lajkic"></i>
-	 		<p id="likeNumber"></p>
-	 		<i class="fa fa-thumbs-o-down" id="dislajkic"></i>
-	 		<p id="dislikeNumber"></p>
-	 	</div>
+		<h2 id="videoName"></h2>
+		<p id="numberVievs"></p>
+		<div class="likeVideo">
+			<i class="fa fa-thumbs-o-up" id="lajkic"></i>
+			<p id="likeNumber"></p>
+			<i class="fa fa-thumbs-o-down" id="dislajkic"></i>
+			<p id="dislikeNumber"></p>
+		</div>
 	</div>
 	<div class="photosSub">
-		<p class="image"><img id="slika" src=""><a href="" id="username"></a></p>
+		<p class="image">
+			<img id="slika" src=""><a href="" id="username"></a>
+		</p>
 		<input type='button' value="Subscribe" id="subscribe">
 		<p id="date"></p>
 		<p id="description"></p>
 	</div>
 	<div class="comentar">
-		<p class="image"><img id="slikaaa" src=""></p>
-		<input type="text" placeholder="Add a public comment..."  id="commentContext">
-		<input type='button' type="submit" id="comButton" value='Comment'>
+		<p class="image">
+			<img id="slikaaa" src="">
+		</p>
+		<input type="text" placeholder="Add a public comment..."
+			id="commentContext"> <input type='button' type="submit"
+			id="comButton" value='Comment'>
 	</div>
 	<div id='sortDiv'>
-	  	<p id='sort'>Sort by</p>
-	  	<select class='nameSort'>
-	  		<option value="viewsCom">Number of like</option>
-	  		<option value="disCom">Number of dislike</option>
-	  		<option value="dateCom">Creation date</option>
-	  	</select>
-	  	<select class="ascDesc">
-	  		<option value="Ascending">Ascending</option>
-	  		<option value="Descending">Descending</option>
-	  	</select>
-	  	<input type='button' id='okSort' value='Sort'>
-	 </div>
-	<div id='divKomentari'>
+		<p id='sort'>Sort by</p>
+		<select class='nameSort'>
+			<option value="viewsCom">Number of like</option>
+			<option value="disCom">Number of dislike</option>
+			<option value="dateCom">Creation date</option>
+		</select> <select class="ascDesc">
+			<option value="Ascending">Ascending</option>
+			<option value="Descending">Descending</option>
+		</select> <input type='button' id='okSort' value='Sort'>
 	</div>
+	<div id='divKomentari'></div>
 	<div id="overlay">
+		<p id='titleEdit'>Edit description</p>
+		<input type='text' id='editDescription'> 
+		<input type='button'
+			value='Ok' id='okEditButton'> <input type='button'
+			value='Cancel' id='cancelEditDescription'>
+	</div>
+	<div id="overlayBlocked">
+		<p id='ovelayTitle'>Video is blocked!</p>
+		<a id='returnHome' href='pocetna.html'>(go back to the homepage)</a>
 	</div>
 </body>
 </html>

@@ -44,7 +44,6 @@ $(document).ready(function(e) {
 		
 		$("#kaoOpis").append("Description: "+data.vlasnik.opis+"");
 		
-		
 		if(data.vlasnik.blokiran == true){
 			blok.text("Blocked");
 		}else{
@@ -87,18 +86,22 @@ $(document).ready(function(e) {
 				bars.append("<a id='adminPage' href='admin.html?korisnickoIme="+data.logovani.korisnickoIme+"'><i class='fa fa-user-o'></i> Admin page</a>");
 			}
 			
+			if(data.logovani.korisnickoIme == data.vlasnik.korisnickoIme){
+				$('#btnsub').hide();
+			}
+			
 			if (data.logovani.uloga == "ADMINISTRATOR" || data.logovani.korisnickoIme == data.vlasnik.korisnickoIme){
 				buttonAdd.show();
 				$('.brisanje').show();
-				$('.maliDiv button').on('click',function(event){
-					
-					var videoId=$(this).attr('name');
-					$.post('VideoPageServlet',{'status':'brisanje','videoId':videoId},function(data){
-						window.location.reload(true);
+				
+				$(document).on('click',".butDelete", function(event){
+						var videoId=$(this).attr('name');
+						$.post('VideoPageServlet',{'status':'brisanje','videoId':videoId},function(data){
+							window.location.reload(true);
+						});
+						event.preventDefault;
+						return false;
 					});
-					event.preventDefault;
-					return false;
-				});
 			}
 			
 			$('#btnsub').on("click",function(event){

@@ -145,7 +145,8 @@ body {
 }
 
 .card img{
-  width:100%;
+  width:70%;
+  margin-left: 15%;
 }
 
 @media (max-width: 700px) {

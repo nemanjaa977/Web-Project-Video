@@ -18,9 +18,9 @@ CREATE TABLE users (
 	PRIMARY KEY(korisnickoIme)
 );
 
-INSERT INTO users(korisnickoIme,slicica,lozinka,ime,prezime,email,uloga,datumRegistracije,brojPratioca) VALUES('mare','photos/Zac.jpg','123','Marko','Markovic','marko@gmail.com','KORISNIK','2018-1-1',0);
-INSERT INTO users(korisnickoIme,slicica,lozinka,ime,prezime,email,uloga,datumRegistracije,brojPratioca) VALUES('dare','photos/Zac.jpg','123','Darko','Darkovic','darko@gmail.com','KORISNIK','2018-1-3',0);
-INSERT INTO users(korisnickoIme,slicica,lozinka,ime,prezime,email,uloga,datumRegistracije,brojPratioca) VALUES('pera','photos/Zac.jpg','123','Petar','Petrovic','petar@gmail.com','ADMINISTRATOR','2018-2-2',0);
+INSERT INTO users(korisnickoIme,slicica,lozinka,ime,prezime,email,uloga,datumRegistracije,brojPratioca) VALUES('mare','photos/korisnik.png','123','Marko','Markovic','marko@gmail.com','KORISNIK','2018-1-1',0);
+INSERT INTO users(korisnickoIme,slicica,lozinka,ime,prezime,email,uloga,datumRegistracije,brojPratioca) VALUES('dare','photos/korisnik.png','123','Darko','Darkovic','darko@gmail.com','KORISNIK','2018-1-3',0);
+INSERT INTO users(korisnickoIme,slicica,lozinka,ime,prezime,email,uloga,datumRegistracije,brojPratioca) VALUES('pera','photos/korisnik.png','123','Petar','Petrovic','petar@gmail.com','ADMINISTRATOR','2018-2-2',0);
 
 CREATE TABLE videos(
 	id BIGINT AUTO_INCREMENT,
@@ -43,20 +43,23 @@ CREATE TABLE videos(
 );
 
 INSERT INTO videos(videoUrl,slicica,nazivVideo,opis,vidljivost,dozvoljeniKomentari,brojLike,brojDislike
-,blokiran,rejtingVidljivost,brojPregleda,datumKreiranja,obrisan,vlasnik) VALUES('https://www.youtube.com/embed/aWkj2d7m1Zw','photos/video.jpg','We Are Your Friends',
-'The best movie!','PUBLIC',true,0,0,false,true,100,'2018-2-3',false,'mare');
+,blokiran,rejtingVidljivost,brojPregleda,datumKreiranja,obrisan,vlasnik) VALUES('https://www.youtube.com/embed/tWG13C3gQbE','photos/video.jpg','Alan Walker - The Spectre (LUM!X Remix)',
+'Dont forget to Like & Share the mix','PUBLIC',true,0,0,false,true,100,'2018-2-3',false,'mare');
 INSERT INTO videos(videoUrl,slicica,nazivVideo,opis,vidljivost,dozvoljeniKomentari,brojLike,brojDislike
-,blokiran,rejtingVidljivost,brojPregleda,datumKreiranja,obrisan,vlasnik) VALUES('https://www.youtube.com/embed/v-4rYf0x-F4','photos/video.jpg','Transformers - The Last Knight',
-'The best movie!','PUBLIC',true,0,0,false,true,200,'2018-2-4',false,'dare');
+,blokiran,rejtingVidljivost,brojPregleda,datumKreiranja,obrisan,vlasnik) VALUES('https://www.youtube.com/embed/WldLcgvy9nA','photos/video.jpg','Meg & Dia - Monster ♫ Shuffle Dance',
+'Meg & Dia - Monster (Music video) bootleg','PUBLIC',true,0,0,false,true,200,'2018-2-4',false,'dare');
 INSERT INTO videos(videoUrl,slicica,nazivVideo,opis,vidljivost,dozvoljeniKomentari,brojLike,brojDislike
-,blokiran,rejtingVidljivost,brojPregleda,datumKreiranja,obrisan,vlasnik) VALUES('https://www.youtube.com/embed/7BWWWQzTpNU','photos/video.jpg','PASSENGERS - Official Trailer (HD)',
-'The best movie!','PRIVATE',true,0,0,false,true,300,'2018-2-4',false,'mare');
+,blokiran,rejtingVidljivost,brojPregleda,datumKreiranja,obrisan,vlasnik) VALUES('https://www.youtube.com/embed/rMi6ViOEMbk','photos/video.jpg','Issues - Julia Michaels (Remix)',
+'Subscribe to Munkee Beatz for more','PRIVATE',true,0,0,false,true,300,'2018-2-4',false,'mare');
 INSERT INTO videos(videoUrl,slicica,nazivVideo,opis,vidljivost,dozvoljeniKomentari,brojLike,brojDislike
-,blokiran,rejtingVidljivost,brojPregleda,datumKreiranja,obrisan,vlasnik) VALUES('https://www.youtube.com/embed/CfMMosvPHfQ','photos/video.jpg','I am Number Four | trailer #2',
-'The best movie!','PRIVATE',true,0,0,false,true,400,'2018-2-4',false,'dare');
+,blokiran,rejtingVidljivost,brojPregleda,datumKreiranja,obrisan,vlasnik) VALUES('https://www.youtube.com/embed/A8agOHX4tWI','photos/video.jpg','Avicii - Wake Me Up (Remix)',
+'Avicii - Wake Me Up(Music video) chill Mix','PRIVATE',true,0,0,false,true,400,'2018-2-4',false,'dare');
 INSERT INTO videos(videoUrl,slicica,nazivVideo,opis,vidljivost,dozvoljeniKomentari,brojLike,brojDislike
-,blokiran,rejtingVidljivost,brojPregleda,datumKreiranja,obrisan,vlasnik) VALUES('https://www.youtube.com/embed/23VflsU3kZE','photos/video.jpg','San Andreas - Official Trailer 2 [HD]',
-'The best movie!','PUBLIC',true,0,0,false,true,500,'2018-2-4',false,'mare');
+,blokiran,rejtingVidljivost,brojPregleda,datumKreiranja,obrisan,vlasnik) VALUES('https://www.youtube.com/embed/LvVOAITOY_s','photos/video.jpg','Alan Walker - All falls Down (Remix)',
+'Alan Walker - ♫ Shuffle Dance Electro House','PUBLIC',true,0,0,false,true,500,'2018-2-4',false,'pera');
+INSERT INTO videos(videoUrl,slicica,nazivVideo,opis,vidljivost,dozvoljeniKomentari,brojLike,brojDislike
+,blokiran,rejtingVidljivost,brojPregleda,datumKreiranja,obrisan,vlasnik) VALUES('https://www.youtube.com/embed/JvYFkoK0Dgw','photos/video.jpg','Leaff - Time(Inspired By Alan Walker)',
+'Give a warm welcome to our new artist Leaff','PRIVATE',true,0,0,false,true,500,'2018-2-4',false,'pera');
 
 CREATE TABLE likeDislike(
 	id BIGINT AUTO_INCREMENT,

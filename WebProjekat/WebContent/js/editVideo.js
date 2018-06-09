@@ -3,78 +3,69 @@ $(document).ready(function(){
 	var nav = $('.navBar');
 	var blockDiv = $('.blockVideo');
 	var descript = $('#descrip');
-	var checkPublic = $('#checkPublic');
-	var checkPrivate = $('#checkPrivate');
-	var checkUnlisted = $('#checkUnlisted');
-	var yesComm = $('#yesComm');
-	var noComm = $('#noComm');
-	var yesRating = $('#yesRating');
-	var noRating = $('#noRating');
-	var yesBlock = $('#yesBlock');
-	var noBlock = $('#noBlock');
 	
 	$.get('VideoPageServlet',{'id':id},function(data){
 		
 		console.log(data);
 
-		nav.append('<a href="pocetna.html"><i class="fa fa-home"></i> Home</a> <a href="user.html?korisnickoIme='+data.logovani.korisnickoIme+'"><i class="fa fa-user-o"></i> Profile</a>');
+		nav.append('<a href="pocetna.html"><i class="fa fa-home"></i> Home</a> <a href="LogOutServlet"><i class="fa fa-angle-double-down"></i> Log Out </a> <a href="user.html?korisnickoIme='+data.logovani.korisnickoIme+'"><i class="fa fa-user-o"></i> Profile</a>');
 		
 		if(data.logovani.uloga != 'ADMINISTRATOR'){
 			blockDiv.hide();
 		}
 		
 		if(data.videos.vidljivost == "PUBLIC"){
-			checkPublic.prop("checked",true);
+			$('#checkPublic').prop("checked",true);
 		}else if(data.videos.vidljivost == "PRIVATE"){
-			checkPrivate.prop("checked",true);
+			$('#checkPrivate').prop("checked",true);
 		}else{
-			checkUnlisted.prop("checked",true);
+			$('#checkUnlisted').prop("checked",true);
 		}
 		
 		if(data.videos.dozvoljeniKomentari == true){
-			yesComm.prop("checked",true);
+			$('#yesComm').prop("checked",true);
 		}else{
-			noComm.prop("checked",false);
+			$('#noComm').prop("checked",true);
 		}
 		
 		if(data.videos.rejtingVidljivost == true){
-			yesRating.prop("checked",true);
+			$('#yesRating').prop("checked",true);
 		}else{
-			noRating.prop("checked",false);
+			$('#noRating').prop("checked",true);
 		}
 		
 		if(data.videos.blokiran == true){
-			yesBlock.prop("checked",true);
+			$('#yesBlock').prop("checked",true);
 		}else{
-			noBlock.prop("checked",false);
+			$('#noBlock').prop("checked",true);
 		}
 		
 		descript.val(data.videos.opis);
 	});
 
 		
-	$('#editSubmitVideo').on('click',function(event){
+	$('.okBtn').on('click',function(event){
 
 		var editedDescription = descript.val();
 		var vid = "PUBLIC";
-		if(checkPrivate.is(':checked')){
+		if($('#checkPrivate').is(':checked')){
 			vid = "PRIVATE";
-		}else if(checkUnlisted.is(':checked')){
+		}else if($('#checkUnlisted').is(':checked')){
 			vid = "UNLISTED"
 		}
 		
 		var comments = true;
-		if(noComm.is(':checked')){
+		if($('#noComm').is(':checked')){
 			comments = false;
 		}
 		
 		var rating = true;
-		if(noRating.is(':checked')){
+		if($('#noRating').is(':checked')){
 			rating = false;
 		}
 		
 		var block = true;
-		if(noBlock.is(':checked')){
+		if($('#noBlock').is(':checked')){
 			block = false;
 		}
 

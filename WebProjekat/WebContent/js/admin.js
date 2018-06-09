@@ -4,13 +4,13 @@ $(document).ready(function(e) {
 	var row = $(".row");
 	var blok = $(".buttonn");
 	
-	nav.append('<a href="pocetna.html"><i class="fa fa-home"></i> Home</a> <a href="user.html?korisnickoIme='+korisnickoIme+'"><i class="fa fa-user-o"></i> Profile </a>');
+	nav.append('<a href="pocetna.html"><i class="fa fa-home"></i> Home</a> <a href="LogOutServlet"><i class="fa fa-angle-double-down"></i> Log Out </a> <a href="user.html?korisnickoIme='+korisnickoIme+'"><i class="fa fa-user-o"></i> Profile </a>');
 	
 	$.get('AdminServlet',{},function(data){
 		for(i in data.korisnici){
 			row.append("<div class='column'> " + 
     				"<div class='card'>" +
-      					"<img src="+'photos/Zac.jpg'+">" + 
+      					"<img src="+'photos/korisnik.png'+">" + 
       					"<div class='container'>" + 
         					"<a id='username' href='user.html?korisnickoIme="+data.korisnici[i].korisnickoIme+"'>"+data.korisnici[i].korisnickoIme+"</a>" +
         					"<p id='name'>Name: "+data.korisnici[i].ime+"</p>" + 

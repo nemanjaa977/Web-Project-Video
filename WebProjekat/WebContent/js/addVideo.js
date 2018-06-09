@@ -11,7 +11,7 @@ $(document).ready(function(){
 	var allowRatingNo = $('input[value="noRat"]');
 	var allowCommNo = $('input[value="noComm"]');
 
-	nav.append('<a href="user.html?korisnickoIme='+korisnickoIme+'"><i class="fa fa-user-o"></i> Profile</a> <a href="pocetna.html"><i class="fa fa-home"></i> Home</a>');
+	nav.append('<a href="user.html?korisnickoIme='+korisnickoIme+'"><i class="fa fa-user-o"></i> Profile</a> <a href="LogOutServlet"><i class="fa fa-angle-double-down"></i> Log Out </a> <a href="pocetna.html"><i class="fa fa-home"></i> Home</a>');
 	
 	submit.on('click',function(event){
 		var URLValue = url.val();

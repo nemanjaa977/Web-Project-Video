@@ -61,11 +61,10 @@ public class VideoDAO {
 		ArrayList<Video> videos=new ArrayList<Video>();
 		ResultSet rset = null;
 		try {
-			String query = "SELECT * FROM videos WHERE vidljivost = ? AND blokiran = ? AND obrisan = ?";
+			String query = "SELECT * FROM videos WHERE vidljivost = ?  AND obrisan = ?";
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, "PUBLIC");
 			pstmt.setBoolean(2, false);
-			pstmt.setBoolean(3, false);
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
 				int index = 1;
@@ -108,12 +107,11 @@ public class VideoDAO {
 		ArrayList<Video> videos=new ArrayList<Video>();
 		ResultSet rset = null;
 		try {
-			String query = "SELECT * FROM videos WHERE vidljivost = ? AND blokiran = ? AND obrisan = ? AND vlasnik = ?";
+			String query = "SELECT * FROM videos WHERE vidljivost = ?  AND obrisan = ? AND vlasnik = ?";
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, "PUBLIC");
 			pstmt.setBoolean(2, false);
-			pstmt.setBoolean(3, false);
-			pstmt.setString(4, username);
+			pstmt.setString(3, username);
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
 				int index = 1;
@@ -156,11 +154,10 @@ public class VideoDAO {
 		ArrayList<Video> videos=new ArrayList<Video>();
 		ResultSet rset = null;
 		try {
-			String query = "SELECT * FROM videos WHERE vidljivost != ? AND blokiran = ? AND obrisan = ?";
+			String query = "SELECT * FROM videos WHERE vidljivost != ? AND obrisan = ?";
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, "UNLISTED");
 			pstmt.setBoolean(2, false);
-			pstmt.setBoolean(3, false);
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
 				int index = 1;
@@ -203,12 +200,11 @@ public class VideoDAO {
 		ArrayList<Video> videos=new ArrayList<Video>();
 		ResultSet rset = null;
 		try {
-			String query = "SELECT * FROM videos WHERE vidljivost != ? AND blokiran = ? AND obrisan = ? AND vlasnik = ?";
+			String query = "SELECT * FROM videos WHERE vidljivost != ? AND obrisan = ? AND vlasnik = ?";
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, "UNLISTED");
 			pstmt.setBoolean(2, false);
-			pstmt.setBoolean(3, false);
-			pstmt.setString(4, username);
+			pstmt.setString(3, username);
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
 				int index = 1;

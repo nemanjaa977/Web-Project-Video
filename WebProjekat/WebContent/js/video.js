@@ -21,17 +21,36 @@ $(document).ready(function(){
 	var ispisDislajkKomentar = $("#dislajkKomentaraa");	
 	
 	$.get('VideoPageServlet',{'id':id},function(data){
-		video.attr("src",data.videos.videoURL+"?rel=0&autoplay=1");
+//		video.attr("src",data.videos.videoURL+"?rel=0&autoplay=1");
 		videoName.text(data.videos.nazivVideo);
 		pregled.text(data.videos.brojPregleda + " views");
-		like.text(data.videos.brojLike);								
+		like.text(data.videos.brojLike);	
 		dislike.text(data.videos.brojDislike);
-		
 		slika.attr("src",data.videos.vlasnik.slicica);
 		vlasnikIme.text(data.videos.vlasnik.korisnickoIme);
 		vlasnikIme.attr("href", "user.html?korisnickoIme="+data.videos.vlasnik.korisnickoIme)
 		datum.text("Published: " + data.videos.datumKreiranja);
 		opiss.text(data.videos.opis);
+		
+		if(data.videos.blokiran == false){
+			video.attr("src",data.videos.videoURL+"?rel=0&autoplay=1");
+		}else{
+			video.attr("src",data.videos.videoURL);
+		}
+			
+		
+		if(data.videos.rejtingVidljivost == false){
+			like.hide();
+			dislike.hide();
+			lajkic.hide();
+			dislajkic.hide();
+		}
+		
+		if(data.videos.dozvoljeniKomentari == false){
+			$('#sortDiv').hide();
+			$('#divKomentari').hide();
+			$('.comentar').hide();
+		}
 		
 		
 		//kad ucita stranicu
@@ -48,7 +67,7 @@ $(document).ready(function(){
 												"<p><img id='slika' src="+data.komentarii[i].vlasnik.slicica+"></p>" +
 												"<a id='korImeKom' href='user.html?korisnickoIme="+data.komentarii[i].vlasnik.korisnickoIme+"'>"+data.komentarii[i].vlasnik.korisnickoIme+"</a>" +
 											"</div>" +
-											"<div class='twoCom'>" +
+											"<div class='twoCom' id='"+data.komentarii[i].id+"'>" +
 												"<p id='datummKreiranja'>Creation date: "+data.komentarii[i].datumKreiranja+"</p>" +
 												"<p id='problem'>"+data.komentarii[i].sadrzaj+"</p>" +
 											"<div class='likeX'>" +
@@ -63,63 +82,183 @@ $(document).ready(function(){
 												"<input type='button' value='Delete' id='brisanjeComentar' name="+data.komentarii[i].id+">" +
 											"</div>" +
 										"</div>");
+			
 			}
 		}
 		
 		if(data.logovani != null){
 			nav.append("<a class='active' href='pocetna.html'><i class='fa fa-home'></i> Home</a>" +
 					"<a href='user.html?korisnickoIme="+data.logovani.korisnickoIme+"'><i class='fa fa-user-o'></i> Profile</a>" +  
-					"<a id='editt' href='editVideo.html?id="+data.videos.id+"'><i class='fa fa-edit'></i> Edit video</a>");  
+					"<a id='editt' href='editVideo.html?id="+data.videos.id+"'><i class='fa fa-edit'></i> Edit video</a>" +
+					"<a href='LogOutServlet'><i class='fa fa-angle-double-down'></i> Log Out </a>");  
 			
 			if(data.logovani.blokiran == true){
 				$('#editt').hide();
 			}
 			
+			if(data.logovani.korisnickoIme != data.videos.vlasnik.korisnickoIme){
+				$('#editt').hide();
+			}
+			
+			if(data.logovani.korisnickoIme == data.videos.vlasnik.korisnickoIme){
+				$('#subscribe').hide();
+				like.show();	
+				dislike.show();
+				lajkic.show();
+				dislajkic.show();
+				$('#sortDiv').show();
+				$('#divKomentari').show();
+				$('.comentar').show();
+			}
+			
+			if(data.logovani.uloga == "ADMINISTRATOR"){
+				like.show();	
+				dislike.show();
+				lajkic.show();
+				dislajkic.show();
+				$('#sortDiv').show();
+				$('#divKomentari').show();
+				$('.comentar').show();
+				$('#editt').show();
+				$('.photosSub').show();
+				$('.dataVideo').show();
+				$('#videoPlayer').show();
+			}
+			
 			addKomentar.on('click',function(event){
-				
-				var komentar=$('#commentContext').val();
-				
-				$.post('KomentarServlet',{'id':data.videos.id,'komentar':komentar,'status':"dodavanje"},function(data){
-					divSaKomentarima.append("<div class='allComment'>" +
-							"<div class='oneC'>" +
-								"<p><img id='slika' src="+data.komentarii.vlasnik.slicica+"></p>" +
-								"<a id='korImeKom' href='user.html?korisnickoIme="+data.komentarii.vlasnik.korisnickoIme+"'>"+data.komentarii.vlasnik.korisnickoIme+"</a>" +
-							"</div>" +
-							"<div class='twoCom'>" +
-								"<p id='datummKreiranja'>Creation date: "+data.komentarii.datumKreiranja+"</p>" +
-								"<p id='problem'>"+data.komentarii.sadrzaj+"</p>" +
-							"<div class='likeX'>" +
-							"<button name='likeCoom' value="+data.komentarii.id+"><i class='fa fa-thumbs-o-up' id='lajkKomentarr'></i></button>" +
-								"<p id='lajkKomentaraa' class="+data.komentarii.id+">"+data.komentarii.brojLike+"</p>" +
-								"<button nanme='dislikeCoom' value="+data.komentarii.id+"><i class='fa fa-thumbs-o-down' id='dislajkKomentarr'></i></button>" +
-								"<p id='dislajkKomentaraa' class="+data.komentarii.id+">"+data.komentarii.brojDislike+"</p>" +
-							"</div>" +
-							"</div>" +
-							"<div id='deleteCom'>" +
-								"<input type='button' value='Edit' id='izmenaComentar' name="+data.komentarii.id+"><br>" +
-								"<input type='button' value='Delete' id='brisanjeComentar' name="+data.komentarii.id+">" +
-							"</div>" +
-						"</div>");
-							
-			});		
-				event.preventDefault();
-				return false;
+				if(data.videos.blokiran == true){
+					if(data.logovani.korisnickoIme == data.videos.vlasnik.korisnickoIme){
+						alert("You are blocked!")
+						event.preventDefault();
+						return false;
+					}else{
+						var komentar=$('#commentContext').val();
+						
+						$.post('KomentarServlet',{'id':data.videos.id,'komentar':komentar,'status':"dodavanje"},function(data){
+							divSaKomentarima.append("<div class='allComment'>" +
+									"<div class='oneC'>" +
+										"<p><img id='slika' src="+data.komentarii.vlasnik.slicica+"></p>" +
+										"<a id='korImeKom' href='user.html?korisnickoIme="+data.komentarii.vlasnik.korisnickoIme+"'>"+data.komentarii.vlasnik.korisnickoIme+"</a>" +
+									"</div>" +
+									"<div class='twoCom' id='"+data.komentarii.id+"'>" +
+										"<p id='datummKreiranja'>Creation date: "+data.komentarii.datumKreiranja+"</p>" +
+										"<p id='problem'>"+data.komentarii.sadrzaj+"</p>" +
+									"<div class='likeX'>" +
+									"<button name='likeCoom' value="+data.komentarii.id+"><i class='fa fa-thumbs-o-up' id='lajkKomentarr'></i></button>" +
+										"<p id='lajkKomentaraa' class="+data.komentarii.id+">"+data.komentarii.brojLike+"</p>" +
+										"<button nanme='dislikeCoom' value="+data.komentarii.id+"><i class='fa fa-thumbs-o-down' id='dislajkKomentarr'></i></button>" +
+										"<p id='dislajkKomentaraa' class="+data.komentarii.id+">"+data.komentarii.brojDislike+"</p>" +
+									"</div>" +
+									"</div>" +
+									"<div id='deleteCom'>" +
+										"<input type='button' value='Edit' id='izmenaComentar' name="+data.komentarii.id+"><br>" +
+										"<input type='button' value='Delete' id='brisanjeComentar' name="+data.komentarii.id+">" +
+									"</div>" +
+								"</div>");
+									
+					});		
+						event.preventDefault();
+						return false;
+					}
+				}else{
+					var komentar=$('#commentContext').val();
+					
+					$.post('KomentarServlet',{'id':data.videos.id,'komentar':komentar,'status':"dodavanje"},function(data){
+						divSaKomentarima.append("<div class='allComment'>" +
+								"<div class='oneC'>" +
+									"<p><img id='slika' src="+data.komentarii.vlasnik.slicica+"></p>" +
+									"<a id='korImeKom' href='user.html?korisnickoIme="+data.komentarii.vlasnik.korisnickoIme+"'>"+data.komentarii.vlasnik.korisnickoIme+"</a>" +
+								"</div>" +
+								"<div class='twoCom' id='"+data.komentarii.id+"'>" +
+									"<p id='datummKreiranja'>Creation date: "+data.komentarii.datumKreiranja+"</p>" +
+									"<p id='problem'>"+data.komentarii.sadrzaj+"</p>" +
+								"<div class='likeX'>" +
+								"<button name='likeCoom' value="+data.komentarii.id+"><i class='fa fa-thumbs-o-up' id='lajkKomentarr'></i></button>" +
+									"<p id='lajkKomentaraa' class="+data.komentarii.id+">"+data.komentarii.brojLike+"</p>" +
+									"<button nanme='dislikeCoom' value="+data.komentarii.id+"><i class='fa fa-thumbs-o-down' id='dislajkKomentarr'></i></button>" +
+									"<p id='dislajkKomentaraa' class="+data.komentarii.id+">"+data.komentarii.brojDislike+"</p>" +
+								"</div>" +
+								"</div>" +
+								"<div id='deleteCom'>" +
+									"<input type='button' value='Edit' id='izmenaComentar' name="+data.komentarii.id+"><br>" +
+									"<input type='button' value='Delete' id='brisanjeComentar' name="+data.komentarii.id+">" +
+								"</div>" +
+							"</div>");
+								
+				});		
+					event.preventDefault();
+					return false;
+				}
 				
 			});
 			
-			$("#overlay").append("<p id='titleEdit'>Edit description</p>" +
-									"<input type='text' id='editDescription'>" +
-									"<input type='button' value='Ok' id='okEditButton'>" +
-									"<input type='button' value='Cancel' id='cancelEditDescription'>");
+//			$("#overlay").append("<p id='titleEdit'>Edit description</p>" +
+//									"<input type='text' id='editDescription'>" +
+//									"<input type='button' value='Ok' id='okEditButton'>" +
+//									"<input type='button' value='Cancel' id='cancelEditDescription'>");
+			
+			if(data.videos.blokiran == true){
+				$('.dataVide').hide();
+				$('.photoSub').hide();
+				$('.comentar').hide();
+				$('#sortDiv').hide();
+				$('#divKomentari').hide();
+				$('#overlayBlocked').fadeIn();
+				$('.photosSub').hide();
+				$('.dataVideo').hide();
+				$('#videoPlayer').hide();
+				
+			}
+			
+			if(data.videos.vlasnik.blokiran == true){
+				$('#overlayBlocked').fadeIn();
+				$('.dataVide').hide();
+				$('.photoSub').hide();
+				$('.comentar').hide();
+				$('#sortDiv').hide();
+				$('#divKomentari').hide();
+				$('.photosSub').hide();
+				$('.dataVideo').hide();
+				$('#videoPlayer').hide();
+				video.attr("src",data.videos.videoURL);
+			}
+			
+			if(data.videos.blokiran == true){
+				if(data.logovani != null){
+					if(data.logovani.korisnickoIme == data.videos.vlasnik.korisnickoIme || data.logovani.uloga == 'ADMINISTRATOR'){
+						$('#overlayBlocked').hide();
+						like.show();	
+						dislike.show();	
+						lajkic.show();
+						dislajkic.show();
+						$('#sortDiv').show();
+						$('#divKomentari').show();
+						$('.comentar').show();
+						
+						$('.photosSub').show();
+						$('.dataVideo').show();
+						$('#videoPlayer').show();
+					}
+				}
+			}
+			
+			if(data.videos.blokiran == true){
+				if(data.logovani.uloga != "ADMINISTRATOR"){
+					$("#izmenaComentar").hide();
+					$("#brisanjeComentar").hide();
+				}
+			}
 			
 			$('input[type=button]#izmenaComentar').on('click',function(event){
 				var id = $(this).attr('name');
 				var selectDescription = '#' + id + ' #problem';
 				console.log(id);
+				console.log(selectDescription);
 				var selectDate = '#' + id + ' #datummKreiranja';
-				var oldText = $(selectDescription).text();
+				var oldText = $(selectDescription).val();
 				$("#editDescription").val(oldText);
 				$("#overlay").fadeIn();
+				
 				
 				$('#overlay #okEditButton').on('click', function(event){
 					var textUpdate = $("#editDescription").val();
@@ -143,29 +282,105 @@ $(document).ready(function(){
 			
 			
 			lajkic.on('click',function(event){		
-				$.get('LikeDislikeServlet',{'id':data.videos.id},function(data){
+				if(data.videos.blokiran == true){
+					if(data.logovani.korisnickoIme == data.videos.vlasnik.korisnickoIme){
+						alert("You are blocked!");
+						
+					}
+					else{
+						console.log("Zahtev otisao");
+						$.get('LikeDislikeServlet',{'id':data.videos.id},function(data){
+							like.text(data.brojLajka);
+							dislike.text(data.brojDislajka);			
+					});		
+						
+					}
+				}else{
+					console.log("Zahtev otisao");
+					$.get('LikeDislikeServlet',{'id':data.videos.id},function(data){
 						like.text(data.brojLajka);
 						dislike.text(data.brojDislajka);			
 				});		
-					event.preventDefault();
-					return false;
+					
+				}
+				event.preventDefault();
+				return false;
 				});
+				
+				
 			
-			dislajkic.on('click',function(event){		
-				$.post('LikeDislikeServlet',{'id':data.videos.id},function(data){
+			dislajkic.on('click',function(event){
+				if(data.videos.blokiran == true){
+					if(data.logovani.korisnickoIme == data.videos.vlasnik.korisnickoIme){
+						alert("You are blocked!");
+						
+						event.preventDefault();
+						return false;
+					}else{
+						$.post('LikeDislikeServlet',{'id':data.videos.id},function(data){
+							like.text(data.brojLajka);
+							dislike.text(data.brojDislajka);			
+					});		
+						event.preventDefault();
+						return false;
+					}
+				}else{
+					$.post('LikeDislikeServlet',{'id':data.videos.id},function(data){
 						like.text(data.brojLajka);
 						dislike.text(data.brojDislajka);			
 				});		
 					event.preventDefault();
 					return false;
+				}
 				});
 			
 			$('button').on('click',function(event){
-				var id=$(this).val();
-				var name = $(this).attr("name");
-				if(name == 'likeCoom'){
-								
-					$.get('KomentarLikeDislikeServlet',{'id':id},function(data){
+				if(data.videos.blokiran == true){
+					if(data.logovani.korisnickoIme == data.videos.vlasnik.korisnickoIme){
+						alert("You are blocked!");
+						
+					}else{
+						var id=$(this).val();
+						var name = $(this).attr("name");
+						if(name == 'likeCoom'){
+										
+							$.get('KomentarLikeDislikeServlet',{'id':id},function(data){
+								var selectLike='#lajkKomentaraa.'+id;
+								var selectDislike='#dislajkKomentaraa.'+id;
+								console.log(selectLike);
+								$(selectLike).text(data.brojLike);
+								$(selectDislike).text(data.brojDislike);
+							});
+							event.preventDefault();
+							return false;
+						}else{				
+						$.post('KomentarLikeDislikeServlet',{'id':id},function(data){
+							var selectLike='#lajkKomentaraa.'+id;
+							var selectDislike='#dislajkKomentaraa.'+id;
+							console.log(selectLike);
+							$(selectLike).text(data.brojLike);
+							$(selectDislike).text(data.brojDislike);
+						});
+						event.preventDefault();
+						return false;
+						}
+					}
+				}else{
+					var id=$(this).val();
+					var name = $(this).attr("name");
+					if(name == 'likeCoom'){
+									
+						$.get('KomentarLikeDislikeServlet',{'id':id},function(data){
+							var selectLike='#lajkKomentaraa.'+id;
+							var selectDislike='#dislajkKomentaraa.'+id;
+							console.log(selectLike);
+							$(selectLike).text(data.brojLike);
+							$(selectDislike).text(data.brojDislike);
+						});
+						event.preventDefault();
+						return false;
+					}else{				
+					$.post('KomentarLikeDislikeServlet',{'id':id},function(data){
 						var selectLike='#lajkKomentaraa.'+id;
 						var selectDislike='#dislajkKomentaraa.'+id;
 						console.log(selectLike);
@@ -174,16 +389,7 @@ $(document).ready(function(){
 					});
 					event.preventDefault();
 					return false;
-				}else{				
-				$.post('KomentarLikeDislikeServlet',{'id':id},function(data){
-					var selectLike='#lajkKomentaraa.'+id;
-					var selectDislike='#dislajkKomentaraa.'+id;
-					console.log(selectLike);
-					$(selectLike).text(data.brojLike);
-					$(selectDislike).text(data.brojDislike);
-				});
-				event.preventDefault();
-				return false;
+					}
 				}
 					
 			});
@@ -214,7 +420,9 @@ $(document).ready(function(){
 					return false;
 				});
 			}
+			
 		}
+		
 		if(data.logovani == null){
 			nav.append('<a class="active" href="pocetna.html"><i class="fa fa-home"></i> Home</a>');
 			
