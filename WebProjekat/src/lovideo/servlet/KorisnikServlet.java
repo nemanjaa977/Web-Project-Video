@@ -60,7 +60,6 @@ public class KorisnikServlet extends HttpServlet {
 		}
 		
 		ArrayList<Korisnik>subskrajberi = KorisnikDAO.subscribedOn(korisnickoIme);
-//		int subscribeNumber = KorisnikDAO.getSubscribeNumber(korisnickoIme);
 		
 		Map<String, Object> data = new HashMap<>();
 		data.put("videos", videos);
@@ -68,7 +67,6 @@ public class KorisnikServlet extends HttpServlet {
 		data.put("logovani", loggedInUser);
 		data.put("isSubscribe", isSubscribe);
 		data.put("subskrajberi", subskrajberi);
-//		data.put("subscribeNumber", subscribeNumber);
 
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonData = mapper.writeValueAsString(data);

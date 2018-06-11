@@ -284,33 +284,8 @@ public class KorisnikDAO {
 		return 0;
 	}
 	
-//	public static int getSubscribeNumber(String userName) {
-//		Connection conn = ConnectionManager.getConnection();
-//
-//		PreparedStatement pstmt = null;
-//		ResultSet rset = null;
-//		try {
-//			String query = "SELECT Count(*) FROM subscribe WHERE korisnik = ?";
-//			pstmt = conn.prepareStatement(query);
-//			pstmt.setString(1, userName);
-//			rset = pstmt.executeQuery();
-//
-//			if (rset.next()) {
-//				int index = 1;
-//				int subs = rset.getInt(index);
-//				return subs;
-//			}
-//		} catch (Exception ex) {
-//			System.out.println("Greska u SQL upitu!");
-//			ex.printStackTrace();
-//		} finally {
-//			try {pstmt.close();} catch (SQLException ex1) {ex1.printStackTrace();}
-//			try {rset.close();} catch (SQLException ex1) {ex1.printStackTrace();}
-//		}
-//		return 0;
-//	}
-	
 	public static ArrayList<Korisnik> subscribedOn(String userName) {
+		//return sve korisnike na koje je vlasnik profila subskrajbovan
 		Connection conn = ConnectionManager.getConnection();
 		ArrayList<Korisnik> subscribed = new ArrayList<Korisnik>();
 		PreparedStatement pstmt = null;

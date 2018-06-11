@@ -21,6 +21,7 @@ CREATE TABLE users (
 INSERT INTO users(korisnickoIme,slicica,lozinka,ime,prezime,email,uloga,datumRegistracije,brojPratioca) VALUES('mare','photos/korisnik.png','123','Marko','Markovic','marko@gmail.com','KORISNIK','2018-1-1',0);
 INSERT INTO users(korisnickoIme,slicica,lozinka,ime,prezime,email,uloga,datumRegistracije,brojPratioca) VALUES('dare','photos/korisnik.png','123','Darko','Darkovic','darko@gmail.com','KORISNIK','2018-1-3',0);
 INSERT INTO users(korisnickoIme,slicica,lozinka,ime,prezime,email,uloga,datumRegistracije,brojPratioca) VALUES('pera','photos/korisnik.png','123','Petar','Petrovic','petar@gmail.com','ADMINISTRATOR','2018-2-2',0);
+INSERT INTO users(korisnickoIme,slicica,lozinka,ime,prezime,email,uloga,datumRegistracije,brojPratioca) VALUES('mika','photos/korisnik.png','123','Mika','Mikic','mika@gmail.com','KORISNIK','2018-4-2',0);
 
 CREATE TABLE videos(
 	id BIGINT AUTO_INCREMENT,
@@ -60,6 +61,12 @@ INSERT INTO videos(videoUrl,slicica,nazivVideo,opis,vidljivost,dozvoljeniKomenta
 INSERT INTO videos(videoUrl,slicica,nazivVideo,opis,vidljivost,dozvoljeniKomentari,brojLike,brojDislike
 ,blokiran,rejtingVidljivost,brojPregleda,datumKreiranja,obrisan,vlasnik) VALUES('https://www.youtube.com/embed/JvYFkoK0Dgw','photos/video.jpg','Leaff - Time(Inspired By Alan Walker)',
 'Give a warm welcome to our new artist Leaff','PRIVATE',true,0,0,false,true,500,'2018-2-4',false,'pera');
+INSERT INTO videos(videoUrl,slicica,nazivVideo,opis,vidljivost,dozvoljeniKomentari,brojLike,brojDislike
+,blokiran,rejtingVidljivost,brojPregleda,datumKreiranja,obrisan,vlasnik) VALUES('https://www.youtube.com/embed/I5TzDEeyypA','photos/video.jpg','Despacito Remix ♫ Shuffle Girls',
+' Shuffle Dance Music Video made by Mr Munkee.','PUBLIC',true,0,0,false,true,500,'2018-8-3',false,'mare');
+INSERT INTO videos(videoUrl,slicica,nazivVideo,opis,vidljivost,dozvoljeniKomentari,brojLike,brojDislike
+,blokiran,rejtingVidljivost,brojPregleda,datumKreiranja,obrisan,vlasnik) VALUES('https://www.youtube.com/embed/Ybs2ASTwHLw','photos/video.jpg','The Script - Hall Of Fame',
+'The Script - (Dark Rehab Hardstyle Remix)','PUBLIC',true,0,0,false,true,500,'2018-7-6',false,'mare');
 
 CREATE TABLE likeDislike(
 	id BIGINT AUTO_INCREMENT,

@@ -38,6 +38,7 @@ public class KomentarLikeDislikeServlet extends HttpServlet {
 				LikeDislike l = new LikeDislike(likeId, true, KorisnikDAO.dateToStringForWrite(d), null, komentar, logovani);
 				LikeDislikeDao.addLikeDislike(l);
 				LikeDislikeDao.addCommentLikeDislike(l.getId(),komentar.getId());
+				//add u likeDislikeComment
 			}
 			else if(li != null && li.isLajkovan() == false) {
 				li.setLajkovan(true);

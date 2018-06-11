@@ -37,6 +37,8 @@ public class VideoPageServlet extends HttpServlet {
 			
 			if(logovani != null) {
 				if(!logovani.getKorisnickoIme().equals(video.getVlasnik().getKorisnickoIme())) {
+					//proverava da li je logovani korisnik koji nije vlasnik subscribe na vlasnik vudea, vraca true ili false 
+					//da bi znao koje dugme prikazati(subscribe, unsubscribe)
 					int subs=KorisnikDAO.findSubscribed(video.getVlasnik().getKorisnickoIme(), logovani.getKorisnickoIme());
 					if(subs != 0) {
 						isSubscribe = true;

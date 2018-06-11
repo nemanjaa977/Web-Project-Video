@@ -28,12 +28,14 @@ public class SubscribeServlet extends HttpServlet {
 		int brojSubova;
 		String status="Subscribe";
 		if(issubscribe == 0) {
+			//ako nije subskrajbovan
 			KorisnikDAO.addSubs(korisnik, subskrajber);
 			k.setBrojPratioca(k.getBrojPratioca()+1);
 			brojSubova=k.getBrojPratioca();
 			KorisnikDAO.update(k);
 		}
 		else {
+			// ako je vec subskrajbovan
 			KorisnikDAO.deleteSubs(korisnik, subskrajber);
 			k.setBrojPratioca(k.getBrojPratioca()-1);
 			brojSubova=k.getBrojPratioca();

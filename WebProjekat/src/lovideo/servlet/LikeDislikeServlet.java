@@ -31,19 +31,25 @@ public class LikeDislikeServlet extends HttpServlet {
 		
 		if(logovani != null) {
 			LikeDislike li = LikeDislikeDao.getVideoLajkOdStraneKorisnika(video.getId(), logovani.getKorisnickoIme());
+			//da li je logovani lajkovao izabrani video
 			if(li == null) {
+				//nepostoji lajk sa logovanim korisnikom za ovaj video
 				Date d = new Date();
 				int likeId = LikeDislikeDao.getLikeId();
 				LikeDislike l = new LikeDislike(likeId, true, KorisnikDAO.dateToStringForWrite(d), video, null, logovani);
 				LikeDislikeDao.addLikeDislike(l);
 				LikeDislikeDao.addVideoLikeDislike(l.getId(),video.getId());
+				// add u likedislikeVideo
 			}
 			else if(li != null && li.isLajkovan() == false) {
+				//da je video dislajkovan
 				li.setLajkovan(true);
 				LikeDislikeDao.updateLike(li);
 			}
 		}
+		//ukupan broj lajkova(sa novim)
 		int brojLajka = LikeDislikeDao.getVideoBrojLajka(video.getId());
+		//ukupan broj dislajka(sa novim)
 		int brojDislajka = LikeDislikeDao.getVideoBrojDislajka(video.getId());
 		video.setBrojLike(brojLajka);
 		video.setBrojDislike(brojDislajka);
@@ -76,6 +82,7 @@ public class LikeDislikeServlet extends HttpServlet {
 				LikeDislikeDao.addVideoLikeDislike(l.getId(),video.getId());
 			}
 			else if(li != null && li.isLajkovan() == true) {
+				//da je lajkovan
 				li.setLajkovan(false);
 				LikeDislikeDao.updateLike(li);
 			}
