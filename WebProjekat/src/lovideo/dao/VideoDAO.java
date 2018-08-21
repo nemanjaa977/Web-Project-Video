@@ -338,4 +338,52 @@ public class VideoDAO {
 		}
 		return 0;
 	}
+	
+	public static ArrayList<Video> getAllPublicSearch(String inputText) {
+		Connection conn = ConnectionManager.getConnection();
+		PreparedStatement pstmt = null;
+		ArrayList<Video> videos=new ArrayList<Video>();
+		ResultSet rset = null;
+		try {
+			String query = "SELECT DISTINCT id, videoURL, slicica, nazivVideo, opis, vidljivost, dozvoljeniKomentari, rejtingVidljivost, "
+					+ "blokiran, brojPregleda, brojLike, brojDislike, datumKreiranja, vlasnik, obrisan FROM videos"
+					+ " WHERE vidljivost = ? AND obrisan = ? OR nazivVideo LIKE '%" +inputText+ "%' OR vlasnik LIKE '%" +inputText+ "%' OR brojPregleda LIKE '%" +inputText+ "%' OR datumKreiranja LIKE '%" +inputText+ "%'";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "PUBLIC");
+			pstmt.setBoolean(2, false);
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				int index = 1;
+				int id=rset.getInt(index++);
+				String videoURL = rset.getString(index++);
+				String slicica = rset.getString(index++);
+				String nazivVideo = rset.getString(index++);
+				String opis = rset.getString(index++);
+				Vidljivost viidljivost = Vidljivost.valueOf(rset.getString(index++));
+				boolean dozvoljeniKomentari = rset.getBoolean(index++);
+				int brojLike = rset.getInt(index++);
+				int brojDislike = rset.getInt(index++);
+				boolean blokiran = rset.getBoolean(index++);
+				boolean rejtingVidljivost = rset.getBoolean(index++);
+				int brojPregleda = rset.getInt(index++);
+				Date d = rset.getDate(index++);
+				String datumKreiranja=KorisnikDAO.dateToString(d);
+				boolean obrisan = rset.getBoolean(index++);
+				String vlasnik = rset.getString(index++);
+				Korisnik k = KorisnikDAO.get(vlasnik);
+				
+				videos.add( new Video(id, videoURL, slicica, nazivVideo, opis, viidljivost, dozvoljeniKomentari, rejtingVidljivost, blokiran,
+						brojPregleda, brojLike, brojDislike, datumKreiranja, k, obrisan));
+			}
+
+			return videos;
+		} catch (Exception ex) {
+			System.out.println("Greska u SQL upitu!");
+			ex.printStackTrace();
+		} finally {
+			try {pstmt.close();} catch (SQLException ex1) {ex1.printStackTrace();}
+			try {rset.close();} catch (SQLException ex1) {ex1.printStackTrace();}
+		}
+		return null;
+	}
 }

@@ -13,26 +13,25 @@ import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import lovideo.dao.KorisnikDAO;
 import lovideo.dao.VideoDAO;
 import lovideo.model.Korisnik;
 import lovideo.model.Video;
 
-/**
- * Servlet implementation class VideoServlet
- */
-public class VideoServlet extends HttpServlet {
+public class SearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<Video> videos=null;
 		Korisnik loggedInUser = null;
+		String uneto = "";
 		try {	
-		
+			
 			HttpSession session = request.getSession();
 			loggedInUser = (Korisnik) session.getAttribute("logovaniKorisnik");
+			uneto = request.getParameter("uneto");
 			
-			if(loggedInUser != null) {
+			if(uneto == "") {
 				if(loggedInUser.getUloga().toString().equals("ADMINISTRATOR")) {
 					videos=VideoDAO.getAll();
 					
@@ -41,17 +40,12 @@ public class VideoServlet extends HttpServlet {
 				}
 			}
 			else {
-			videos=VideoDAO.getAllPublic();
+			videos=VideoDAO.getAllPublicSearch(uneto);
 			}
 			
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		
-//		if(loggedInUser == null) {
-//			String uneto = request.getParameter("uneto");
-//			videos = VideoDAO.getAllPublicSearch(uneto);
-//		}
 		
 		Map<String, Object> data = new HashMap<>();
 		data.put("videos", videos);
@@ -64,7 +58,10 @@ public class VideoServlet extends HttpServlet {
 		response.getWriter().write(jsonData);
 	}
 
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }

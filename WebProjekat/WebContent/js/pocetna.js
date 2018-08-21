@@ -26,7 +26,7 @@ $(document).ready(function() {
 		}
 	});
 	
-$(document).on('click',"#okSort", function(event){
+	$(document).on('click',"#okSort", function(event){
 		
 		var ascDesc=$(".ascDesc").val();
 		var sortBy=$(".nameSort").val();
@@ -54,6 +54,29 @@ $(document).on('click',"#okSort", function(event){
 			}
 		}
 		event.preventDefault;
+		return false;
+	});
+	
+	$('body').on('click', '#sButton',function(event){
+		console.log("ssss");
+		var preuzetiText = $('#search').val();
+		console.log(preuzetiText);
+		$.get("SearchServlet",{"uneto": preuzetiText},function(data){
+			console.log("proslo");
+			row.empty();
+			for(i in data.videos){
+				console.log(data.videos);
+				row.append("<div class='column' id='column'> " + 
+	  					"<p><img src="+data.videos[i].slicica+"></p>" + 
+	  					"<a href='user.html?username="+data.videos[i].vlasnik.korisnickoIme+"'><p id='usernamee'>"+data.videos[i].vlasnik.korisnickoIme+"</p></a>" +
+	  					"<a href='video.html?id="+data.videos[i].id+"' style='border:none; color:#00004d; background:none; cursor:pointer'><p id='videoName'>"+data.videos[i].nazivVideo+"</p></a>" +
+	  					"<p id='views'>"+data.videos[i].brojPregleda+"  views</p>" +
+	  					"<p id='dateCreation'>Date: "+data.videos[i].datumKreiranja+"</p>" +
+	  				"</div>");
+			}
+		});
+		
+		event.preventDefault();
 		return false;
 	});
 	
