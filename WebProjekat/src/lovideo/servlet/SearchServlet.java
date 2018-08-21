@@ -32,9 +32,13 @@ public class SearchServlet extends HttpServlet {
 			uneto = request.getParameter("uneto");
 			
 			if(uneto == "") {
-				if(loggedInUser.getUloga().toString().equals("ADMINISTRATOR")) {
-					videos=VideoDAO.getAll();
-					
+				if(loggedInUser != null) {
+					if(loggedInUser.getUloga().toString().equals("ADMINISTRATOR")) {
+						videos=VideoDAO.getAll();
+						
+					}else {
+						videos=VideoDAO.getAllPublic();
+					}
 				}else {
 					videos=VideoDAO.getAllPublic();
 				}

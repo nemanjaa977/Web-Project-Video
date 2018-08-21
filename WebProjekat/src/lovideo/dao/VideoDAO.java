@@ -347,7 +347,7 @@ public class VideoDAO {
 		try {
 			String query = "SELECT DISTINCT id, videoURL, slicica, nazivVideo, opis, vidljivost, dozvoljeniKomentari, rejtingVidljivost, "
 					+ "blokiran, brojPregleda, brojLike, brojDislike, datumKreiranja, vlasnik, obrisan FROM videos"
-					+ " WHERE vidljivost = ? AND obrisan = ? OR nazivVideo LIKE '%" +inputText+ "%' OR vlasnik LIKE '%" +inputText+ "%' OR brojPregleda LIKE '%" +inputText+ "%' OR datumKreiranja LIKE '%" +inputText+ "%'";
+					+ " WHERE vidljivost = ? AND obrisan = ? AND (nazivVideo LIKE '%" +inputText+ "%' OR vlasnik LIKE '%" +inputText+ "%' OR brojPregleda LIKE '%" +inputText+ "%' OR datumKreiranja LIKE '%" +inputText+ "%')";
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, "PUBLIC");
 			pstmt.setBoolean(2, false);
@@ -368,9 +368,9 @@ public class VideoDAO {
 				int brojPregleda = rset.getInt(index++);
 				Date d = rset.getDate(index++);
 				String datumKreiranja=KorisnikDAO.dateToString(d);
-				boolean obrisan = rset.getBoolean(index++);
 				String vlasnik = rset.getString(index++);
 				Korisnik k = KorisnikDAO.get(vlasnik);
+				boolean obrisan = rset.getBoolean(index++);
 				
 				videos.add( new Video(id, videoURL, slicica, nazivVideo, opis, viidljivost, dozvoljeniKomentari, rejtingVidljivost, blokiran,
 						brojPregleda, brojLike, brojDislike, datumKreiranja, k, obrisan));
