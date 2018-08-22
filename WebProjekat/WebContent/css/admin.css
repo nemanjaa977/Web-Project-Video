@@ -50,6 +50,16 @@ body {
 	margin: 1%;
 }
 
+#ssButton{
+	font-size: 27px;
+	padding-bottom: 4px;
+	color: grey;
+	background: white;
+	cursor: pointer;
+	border: 1px solid black;
+	
+}
+
 #sortDiv{
 	float: right;
 }

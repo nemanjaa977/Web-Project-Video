@@ -61,7 +61,7 @@ $(document).ready(function() {
 		console.log("ssss");
 		var preuzetiText = $('#search').val();
 		console.log(preuzetiText);
-		$.get("SearchServlet",{"uneto": preuzetiText},function(data){
+		$.get("SearchServlet",{'status': 'searchPublic',"uneto": preuzetiText},function(data){
 			console.log("proslo");
 			row.empty();
 			for(i in data.videos){

@@ -98,19 +98,55 @@ $(document).ready(function(e) {
 		return false;
 	});
 	
+	$('body').on('click', '#ssButton',function(event){
+		console.log("ssss");
+		var preuzetiText = $('#search').val();
+		console.log(preuzetiText);
+		$.get("SearchServlet",{'status': 'searchAllUsers',"uneto": preuzetiText},function(data){
+			console.log("proslo");
+			row.empty();
+			for(i in data.korisnici){
+				row.append("<div class='column'> " + 
+	    				"<div class='card'>" +
+	      					"<img src="+'photos/korisnik.png'+">" + 
+	      					"<div class='container'>" + 
+	        					"<a id='username' href='user.html?korisnickoIme="+data.korisnici[i].korisnickoIme+"'>"+data.korisnici[i].korisnickoIme+"</a>" +
+	        					"<p id='name'>Name: "+data.korisnici[i].ime+"</p>" + 
+	        					"<p id='surname'>Surname: "+data.korisnici[i].prezime+"</p>" +
+	        					"<p id='email'>Email: "+data.korisnici[i].email+"</p>" +
+	        					"<p id='role'>Role: "+data.korisnici[i].uloga+"</p>" +
+	        					"<p><button class='button' name="+data.korisnici[i].korisnickoIme+"><i class='fa fa-trash'></i> Delete</button></p>" +
+	        					"<p><button class='buttonn' name="+data.korisnici[i].korisnickoIme+">Block</button></p>" +
+	        					"<p><button class='buttonnn' name="+data.korisnici[i].korisnickoIme+">Unblock</button></p>" +
+	      					"</div>" +
+	    				"</div>" +
+	  				"</div>");
+				var name=data.korisnici[i].korisnickoIme;
+				if(data.korisnici[i].blokiran == true){
+					$("button.buttonn[name="+name+"]").hide();
+				}else{
+					$("button.buttonnn[name="+name+"]").hide();
+				}
+			}
+		});
+		
+		event.preventDefault();
+		return false;
+	});
+	
 });
 
-function f(){
-	var input = $('#search').val().toUpperCase();
-	$(".column").each(function(){
-		  if($(this).html().toUpperCase().includes(input)){
-		    $(this).show();
-		  }
-		  else{
-			$(this).hide();
-		  }
-	});
-}
+//function f(){
+//	var input = $('#search').val().toUpperCase();
+//	$(".column").each(function(){
+//		  if($(this).html().toUpperCase().includes(input)){
+//		    $(this).show();
+//		  }
+//		  else{
+//			$(this).hide();
+//		  }
+//	});
+//}
 
 function sortUsernameA(){
 	 $('.column').sort(function(a, b) {

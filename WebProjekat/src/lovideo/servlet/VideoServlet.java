@@ -48,11 +48,6 @@ public class VideoServlet extends HttpServlet {
 			// TODO: handle exception
 		}
 		
-//		if(loggedInUser == null) {
-//			String uneto = request.getParameter("uneto");
-//			videos = VideoDAO.getAllPublicSearch(uneto);
-//		}
-		
 		Map<String, Object> data = new HashMap<>();
 		data.put("videos", videos);
 

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import lovideo.dao.KorisnikDAO;
 import lovideo.dao.VideoDAO;
 import lovideo.model.Korisnik;
 import lovideo.model.Video;
@@ -23,28 +24,38 @@ public class SearchServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<Video> videos=null;
-		Korisnik loggedInUser = null;
+		Korisnik logovani = null;
 		String uneto = "";
+		ArrayList<Korisnik> korisnici = null;
 		try {	
 			
 			HttpSession session = request.getSession();
-			loggedInUser = (Korisnik) session.getAttribute("logovaniKorisnik");
+			logovani = (Korisnik) session.getAttribute("logovaniKorisnik");
 			uneto = request.getParameter("uneto");
+			String status = request.getParameter("status");
 			
-			if(uneto == "") {
-				if(loggedInUser != null) {
-					if(loggedInUser.getUloga().toString().equals("ADMINISTRATOR")) {
-						videos=VideoDAO.getAll();
-						
+			if(status.equals("searchPublic")) {
+				if(uneto == "") {
+					if(logovani != null) {
+						if(logovani.getUloga().toString().equals("ADMINISTRATOR")) {
+							videos=VideoDAO.getAll();
+							
+						}else {
+							videos=VideoDAO.getAllPublic();
+						}
 					}else {
 						videos=VideoDAO.getAllPublic();
 					}
-				}else {
-					videos=VideoDAO.getAllPublic();
 				}
-			}
-			else {
-			videos=VideoDAO.getAllPublicSearch(uneto);
+				else {
+				videos=VideoDAO.getAllPublicSearch(uneto);
+				}
+			}else if(status.equals("searchAllUsers")) {
+				if(uneto == "") {
+					korisnici = KorisnikDAO.getAll();
+				}else {
+					korisnici=KorisnikDAO.getAllSearchUser(uneto);
+				}
 			}
 			
 		} catch (Exception e) {
@@ -53,6 +64,8 @@ public class SearchServlet extends HttpServlet {
 		
 		Map<String, Object> data = new HashMap<>();
 		data.put("videos", videos);
+		data.put("logovani", logovani);
+		data.put("korisnici", korisnici);
 
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonData = mapper.writeValueAsString(data);

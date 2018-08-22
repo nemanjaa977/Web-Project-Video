@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import lovideo.model.Korisnik;
+import lovideo.model.Video;
 import lovideo.model.Korisnik.Uloga;
+import lovideo.model.Video.Vidljivost;
 
 public class KorisnikDAO {
 	public static Korisnik get(String korisnickoIme) {
@@ -312,5 +314,46 @@ public class KorisnikDAO {
 			try {rset.close();} catch (SQLException ex1) {ex1.printStackTrace();}
 		}
 		return subscribed;
+	}
+	
+	// pretraga 
+	public static ArrayList<Korisnik> getAllSearchUser(String unetiText) {
+		Connection conn = ConnectionManager.getConnection();
+		PreparedStatement pstmt = null;
+		ArrayList<Korisnik> users=new ArrayList<Korisnik>();
+		ResultSet rset = null;
+		try {
+			String query = "SELECT DISTINCT korisnickoIme, slicica, lozinka, ime, prezime, email, opis, datumRegistracije, uloga, blokiran,"
+					+ "obrisan, brojPratioca FROM users WHERE obrisan = ? AND (korisnickoIme LIKE '%" +unetiText+ "%' OR ime LIKE '%" +unetiText+ "%' OR prezime LIKE '%" +unetiText+ "%' OR email LIKE '%" +unetiText+ "%' OR uloga LIKE '%" +unetiText+ "%')";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setBoolean(1, false);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				int index = 1;
+				String korisnickoIme = rset.getString(index++);
+				String slika = rset.getString(index++);
+				String lozinka = rset.getString(index++);
+				String ime = rset.getString(index++);
+				String prezime = rset.getString(index++);
+				String email = rset.getString(index++);
+				String opis = rset.getString(index++);
+				Date datum = rset.getDate(index++);
+				String datumRegistracije = dateToString(datum);
+				Uloga uloga = Uloga.valueOf(rset.getString(index++));
+				boolean blokiran = rset.getBoolean(index++);
+				boolean obrisan = rset.getBoolean(index++);
+				int brojPratioca = rset.getInt(index++);
+				users.add(new Korisnik(korisnickoIme, slika, lozinka, ime, prezime, email, opis, datumRegistracije, uloga, blokiran,
+						null, null, null, obrisan, brojPratioca));	
+			}
+			return users;
+		} catch (Exception ex) {
+			System.out.println("Greska u SQL upitu!");
+			ex.printStackTrace();
+		} finally {
+			try {pstmt.close();} catch (SQLException ex1) {ex1.printStackTrace();}
+			try {rset.close();} catch (SQLException ex1) {ex1.printStackTrace();}
+		}
+		return null;
 	}
 }
