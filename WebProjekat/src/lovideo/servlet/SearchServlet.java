@@ -48,7 +48,13 @@ public class SearchServlet extends HttpServlet {
 					}
 				}
 				else {
-				videos=VideoDAO.getAllPublicSearch(uneto);
+					if(logovani != null) {
+						if(logovani.getUloga().toString().equals("ADMINISTRATOR")) {
+							videos=VideoDAO.getAllPublicSearchByAdmin(uneto);
+						}
+					}else {
+						videos=VideoDAO.getAllPublicSearch(uneto);
+					}
 				}
 			}else if(status.equals("searchAllUsers")) {
 				if(uneto == "") {
